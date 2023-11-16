@@ -1,0 +1,49 @@
+/* 네비게이션 바 */
+.navbar {
+    width: auto;
+    height: 48px;
+    background-color: #EFF4F9;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 4px -4px black;
+  }
+
+.nav_menu {
+  display: flex;
+  list-style: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+}
+
+.menu_icon_group{
+  display: flex;
+  list-style: none;
+  margin-left: auto;
+}
+
+.menu_icon {
+    opacity: 0.7;
+  }
+  
+.nav_menu li {
+  position: relative;
+  padding: 8px 6px;
+  width: 32px;
+  height: 32px;
+}
+
+.nav_menu img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+  /* .nav_menu li:hover {
+    color: var(--background-color);
+    background-color: var(--accent-color);
+    border-radius: 4px;}
+  
+  .nav_menu li a:hover {
+    color: var(--background-color);} */

@@ -1,0 +1,169 @@
+/* 반응형 */
+/* 모든기기공통 CSS */
+body {background-color: white;
+    margin: 0; padding: 0;}
+
+/* 프로필 및 로그 관련 css*/
+.profile {
+    margin: 100px 32px 20px 32px;
+    float: center;
+    display: flex;
+    align-items: center; /* 내용을 세로 중앙에 배치 */
+}
+
+.profile-box {
+    display: flex;
+    flex-direction: column; /* 내용물을 수직으로 쌓기 */
+    align-items: center; /* 내용을 세로 중앙에 배치 */
+    margin-right: 20px; /* 간격을 위한 여백 추가 */
+}
+
+.profile-name {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+/* 테이블 테두리 스타일 */
+.table-container {
+    width: 100%; /* 남은 너비 사용 */
+    overflow: hidden; /* 둥근 모서리가 올바르게 표시되는지 확인 */
+    font-size: 14px;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.text-normal{
+    font-weight: normal;
+    color: #757575;
+}
+
+.table-container table {
+    border-collapse: separate; /* 테두리 스타일 지정 */
+    width: 100%;
+    border-spacing: 0;
+    overflow: hidden; /* 둥근 모서리가 올바르게 표시되는지 확인 */
+}
+
+.table-container td {
+    padding: 16px;
+    border: 1px solid #757575;
+    border-top-color: transparent; /* 위쪽 테두리를 투명하게 설정 */
+}
+
+.table-container tr:first-child td:first-child {
+    border-top-left-radius: 5px; 
+    border-top-color: #757575;
+}
+
+.table-container tr:first-child td:last-child {
+    border-top-right-radius: 5px;
+}
+
+.table-container tr:last-child td:first-child {
+    border-bottom-left-radius: 5px; 
+}
+
+.table-container tr:last-child td:last-child {
+    border-bottom-right-radius: 5px; 
+}
+
+/* 관리 버튼 css */
+/* 테이블 테두리 스타일 */
+.management {
+    margin: 50px 32px 20px 32px;
+}
+.management-box {
+    width: 100%; /* 남은 너비 사용 */
+    overflow: hidden; /* 둥근 모서리가 올바르게 표시되는지 확인 */
+    font-size: 14px;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.text-normal{
+    font-weight: normal;
+    color: #757575;
+}
+
+.management-box table {
+    border-collapse: separate; /* 테두리 스타일 지정 */
+    width: 100%;
+    border-spacing: 0;
+    overflow: hidden; /* 둥근 모서리가 올바르게 표시되는지 확인 */
+    height: 120px;
+}
+
+.management-box td {
+    padding: 16px;
+    border: 1px solid #757575;
+    border-color: #757575;
+
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.management-box td:nth-child(2) {
+    border-left-color: #757575; /* 두 번째 TD의 왼쪽 테두리 색상 설정 */
+    border-right-color: #757575; /* 두 번째 TD의 오른쪽 테두리 색상을 설정 */
+}
+
+.management-box tr:first-child td:first-child {
+    border-top-left-radius: 5px;
+    border-left-color: #757575;
+}
+
+.management-box tr:first-child td:last-child {
+    border-top-right-radius: 5px;
+    border-right-color: #757575;
+}
+
+.management-box tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+    border-left-color: #757575;
+}
+
+.management-box tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+    border-right-color: #757575;
+}
+
+/* 표를 3등분으로 나누기 */
+.management-box td:nth-child(3),
+.management-box td:nth-child(4),
+.management-box td:nth-child(5) {
+    width: 33.33%; /* 각 열 너비를 테이블 너비의 1/3로 설정 */
+}
+
+h5.text-normal1{
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 0;
+
+}
+
+.management-button {
+    flex-direction: column; /* 내용물을 수직으로 쌓기 */
+    align-items: center; /* 내용을 세로 중앙에 배치 */
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+}
+
+.management-button:hover {
+    background-color: #1E90FF; 
+    opacity: 0.8;
+    cursor: pointer; 
+}
+.management-button:hover h5.text-normal1 {
+    color: white; 
+}
+.management-button:hover img {
+    filter: brightness(0) invert(1); /* Invert the image color to white on hover */
+}
+

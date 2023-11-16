@@ -1,0 +1,33 @@
+/* 반응형 */
+/* 모든기기공통 CSS */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+}
+
+/* 팝업창 */
+#popup img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* x 버튼 */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 30px;
+    color: black;
+}
+
+/* 슬라이드쇼 */
+.slideshow img { /* 이미지 슬라이드 애니메이션 */
+    width: 100%;
+    height: auto;
+   
+  }
+  .fade {
+    animation-name: slide;
+    animation-duration: 5s;
+  }

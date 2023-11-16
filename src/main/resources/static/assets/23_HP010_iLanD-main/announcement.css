@@ -1,0 +1,111 @@
+/* 반응형 */
+/* 모든기기공통 CSS */
+body {background-color: #ffffff;
+    margin: 0; padding: 0;}
+
+.top-button {
+  display: flex;
+  align-items: center; /* 요소들을 세로 가운데 정렬 */
+  margin: 20px 16px;
+}
+
+/* 입력 창과 아이콘을 감싸는 div 스타일 */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: solid 1px black;
+  padding: 0px 10px;
+  height: 40px;
+  border-radius: 20px;
+  border-color: #d2d2d2;
+  /* width: 68vh; 반응형으로 맞추기 */
+}
+
+/* 입력 창 스타일 */
+.search-input {
+  border: none;
+  padding: 6px;
+}
+
+img .search-button {
+  opacity: 0.7;
+}
+
+/* 검색 버튼 (투명 버튼) */
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* 콤보버튼(필터) */
+#combobox {
+  height: 40px;
+  width: 34%;
+  margin-right: 8px;
+  padding: 0px 10px;
+  border-radius: 20px;
+  border-color: #d2d2d2;
+}
+
+div.announcement_ara{
+  width: 100%;
+  height: auto;
+}
+
+ul{
+  list-style-type: none;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0;
+  
+}
+
+/* 리스트 안 글자크기 */
+.announcement-list .title{
+  font-weight: bold;
+  font-size: 14px;
+  list-style-type: none;
+  padding-left: 10px;
+}
+li.title{
+  padding-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  
+}
+li.content{
+  font-size: 14px;
+  font-style: normal;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  
+}
+.announcement-list{
+  border-bottom  : solid 1px #d2d2d2 ;
+}
+
+
+/* 중요 공지 blue*/
+#blue { /* width가 넘침, 크기 지정 x 반응형이어야해서 */
+
+  background-color: #EFF4F9; 
+  font-size: 14px;
+  list-style-type: none;
+  padding-left: 10px;
+
+}
+
+/* 목록 페이지 숫자*/
+.number {
+  margin-top: 100px;
+  font-size: 14px;
+  font-style: normal;
+  list-style-type: none;
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+  border-bottom: solid 2px black;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="nav_employee.css">
+    <link rel="stylesheet" type="text/css" href="employee_main.css">
+    <title>Employee main</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_menu">
+          <li><a href="#"><img width="32" height="32" src="icon/iLanD_logo.png" onclick="openPage('iLanD_main.html')"></a></li>
+          <div class="menu_icon_group">
+            <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
+            <li><a href="iLanD_main.html"><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/96/exit--v1.png" alt="exit--v1"/></a></li>
+          </div>
+        </ul>
+    </nav>
+    <script src="nav_employee.js"></script>
+    
+    <div class="profile">
+      <div class="profile-box">
+        <img width="58" height="58" src="icon/profile.png" alt="">
+        <h6 class="profile-name">User 0923</h6>
+      </div>
+      <div class="table-container">
+        <table class="table-box">
+          <tr> 
+            <td class="text-bold">최근 기록 & 수정 로그</td>
+          </tr>
+          <tr>
+            <td class="text-normal">공지변경: 2023년 OO해상..</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="management">
+      <div class="management-box">
+        <table>
+          <tr> 
+            <td class="management-button" type="button" onclick="openPage('management_chatting.html')">
+              <img width="35" height="35" src="https://img.icons8.com/fluency-systems-regular/96/comments--v2.png" alt="comments--v2"/>
+              <h5 class="text-normal1">채팅 관리</h5></td>
+            <td class="management-button" type="button" onclick="openPage('management_announcement.html')">
+              <img width="35" height="35" src="https://img.icons8.com/fluency-systems-regular/96/appointment-reminders--v1.png" alt="appointment-reminders--v1"/>
+              <h5 class="text-normal1">공지 관리</h5></td>
+            <td class="management-button" type="button" onclick="openPage('management_contents.html')">
+              <img width="35" height="35" src="https://img.icons8.com/fluency-systems-regular/96/opened-folder.png" alt="opened-folder"/>
+              <h5 class="text-normal1">콘텐츠 관리</h5></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</body>
+</html>

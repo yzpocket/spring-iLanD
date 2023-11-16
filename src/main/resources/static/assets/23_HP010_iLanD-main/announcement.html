@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="nav.css">
+    <link rel="stylesheet" type="text/css" href="announcement.css">
+    <title>Announcement</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_menu">
+          <li><a href="#"><img width="32" height="32" src="icon/iLanD_logo.png" onclick="openPage('iLanD_main.html')"></a></li>
+          <div class="menu_icon_group">
+            <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
+            <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/menu--v1.png" alt="menu--v1"/></a></li>
+          </div>
+        </ul>
+    </nav>
+    <script src="nav.js"></script>
+
+    <div class="top-button">
+        <select name="combobox" id="combobox">
+            <option value="3">날짜</option>
+            <option value="1">제목</option>
+            <option value="2">내용</option>
+        </select>
+        <form action="검색결과페이지.html" method="GET"> <!--html 링크 추후 수정-->
+            <!-- 입력 창과 아이콘을 감싸는 div -->
+            <div class="search-container">
+                <!-- 입력 창 생성 -->
+                <input type="text" name="검색어" placeholder="검색어를 입력하세요" class="search-input">
+                <!-- 검색 버튼 (이미지 아이콘) -->
+                <button type="submit" class="search-button">
+                    <img width="20" height="20" src="https://img.icons8.com/sf-regular/48/search.png" alt="search"/>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="announcement_area">
+        <ul class="annbody">
+                <div id="blue">	
+                    <li class="title">2023년 OO해상관광 OOO 24호 운행 지연 안내</li>
+                    <li class="content">2023. 09. 17 &#124; 조회 2</li>
+                </div>
+               <div class="announcement-list">
+                    <li class="title">2023년 OO해상관광 OOO 제휴서비스  리스트</li>
+                    <li class="content">2023. 09. 17 &#124; 조회 3</li>            
+               </div>
+               <div class="announcement-list">	
+                    <li class="title">2023년 OO해상관광 OOO 2호 운행 정보</li>
+                    <li class="content">2023. 09. 17 &#124; 조회 1</li>
+               </div>
+               <div class="announcement-list">
+                       <li class="title">2023년 OO해상관광 OOO 휴항 안내</li>
+                       <li class="content">2023. 09. 17 &#124; 조회 2</li>            
+                </div>
+                <div class="announcement-list">	
+                       <li class="title">2023년 OO해상관광 OOO 항만 사고 예방 영상</li>
+                       <li class="content">2023. 09. 17 &#124; 조회 2</li>
+                </div>
+                <div class="announcement-list">
+                       <li class="title">2022년 OO해상관광 OOO 8호 긴급 공지 </li>
+                       <li class="content">2023. 09. 15 &#124; 조회 4</li>            
+                </div>
+          
+                   
+        </ul>
+       </div>
+       
+    
+    <div class="number">
+        <li><img width="14" height="14" src="https://img.icons8.com/ios/50/double-left.png" alt="double-left"/>
+            <img width="14" height="14" src="https://img.icons8.com/ios/50/back--v1.png" alt="back--v1"/>
+            <span class="bold">1</span> 2 3 4 5
+            <img width="14" height="14" src="https://img.icons8.com/ios/50/forward--v1.png" alt="forward--v1"/>
+            <img width="14" height="14" src="https://img.icons8.com/ios/50/double-right.png" alt="double-right"/>
+        </li>
+    </div>
+</body>
+</html>

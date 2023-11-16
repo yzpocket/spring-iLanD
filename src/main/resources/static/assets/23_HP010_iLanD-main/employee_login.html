@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="nav_employee.css">
+    <link rel="stylesheet" type="text/css" href="employee_login.css">
+    <title>Employee login</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_menu">
+          <li><a href="#"><img width="32" height="32" src="icon/iLanD_logo.png" onclick="openPage('iLanD_main.html')"></a></li>
+          <div class="menu_icon_group">
+            <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
+            <li><a href="iLanD_main.html"><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/96/exit--v1.png" alt="exit--v1"/></a></li>
+          </div>
+        </ul>
+    </nav>
+    <script src="nav_employee.js"></script>
+
+      <div class="wrap">
+        <form method="get"> <!-- action="서버의 url"-->
+            <div class="login-img">
+              <li><a href=""><img width="80" height="80" src="icon/profile.png" alt=""></i></a></li>
+            </div>
+            <h2>Login Details</h2>
+            <div class="login_id">
+                <input type="email" name="" id="" placeholder="Email">
+            </div>
+            <div class="login_pw">
+                <input type="password" name="" id="" placeholder="Password">
+            </div>
+            <div class="submit">
+                <button type="button" class="login_sb" onClick="location.href='employee_main.html'">Login</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</body>
+</html>

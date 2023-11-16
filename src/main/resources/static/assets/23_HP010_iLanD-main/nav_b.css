@@ -1,0 +1,46 @@
+ /* 네비게이션 바 */
+ .navbar-custom {
+    width: auto;
+    height: 48px;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 4px 4px -4px black;
+  }
+  
+  .nav_menu-custom {
+    display: flex;
+    list-style: none;
+    padding: 8px 16px;
+    margin: 0;
+  }
+  
+  .menu_icon-custom {
+   opacity: 0.7;
+   width: 26px;
+   height: 26px;
+  }
+  
+  .menu_icon_group-custom{
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+  }
+  
+  .menu_icon_group-custom li {
+    margin-left: 10px; /* 아이콘 간격을 10px로 설정 */
+  }
+  
+  .nav_menu-custom li {
+    position: relative;
+    padding: 8px 6px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .nav_menu-custom img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

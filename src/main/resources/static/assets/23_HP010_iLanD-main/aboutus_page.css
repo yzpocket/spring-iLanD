@@ -1,0 +1,58 @@
+/* 반응형 */
+/* 모든기기공통 CSS */
+body {background-color: #EFF4F9;
+    margin: 0; padding: 0;}
+
+/* 사진 & 사진 위 글자 그룹 (전체 뷰포트를 포함하도록 이미지 설정) */
+.img-box {
+    position: relative; 
+    position: fixed;
+    width: 100vw; /* 뷰포트 너비의 100% */
+    height: 100vh; /* 뷰포트 높이의 100% */
+    overflow: hidden; /* 이미지가 더 큰 경우 오버플로 숨기기 */
+}
+
+/* 컨테이너에서 이미지 스타일 지정 */
+.img-box img {
+    width: 300%; /* 이미지 너비를 해당 컨테이너의 300%로 설정 */
+    height: 100%; /* 이미지 높이를 컨테이너의 100%으로 만듦 */
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    transform: translateX(0%); /* Start the image from the left */
+}
+
+/* 이미지 위에 반투명 직사각형 오버레이 */ 
+/* img .black-img {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+} */ /* 이거 왜 안될까...? 만약에 이거 성공하면 .img-box 포지션 relative 지우기 */
+.black {
+    position: absolute;
+    background-color: black;
+    filter: brightness(60%);
+}
+
+/* 이미지 위에 글씨쓰기 */
+.black-img {
+    position: relative;
+}
+
+.img-text {
+    margin: 0px 16px;
+}
+
+.img-text .content, .img-text .content1{
+    position: absolute;
+    color: white;
+    font-size: 10px;
+    font-style: normal;
+}
+.content {bottom: 6%;}
+.content1 {bottom: 2%}
+
+h3, h4 {
+    position: absolute;
+    color: white;
+    font-style: normal;
+    font-weight: normal;
+}
+h3 {bottom: 31%; font-size: 20px;}
+h4 {bottom: 28%; font-size: 14px;}

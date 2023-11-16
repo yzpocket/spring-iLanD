@@ -1,0 +1,121 @@
+/* 반응형 */
+/* 모든기기공통 CSS */
+
+/* 부트스트랩의 body 배경색을 덮어씀 */
+body {
+    background-color: #EFF4F9 !important;
+    margin: 0; padding: 0;}
+  
+  body button {
+    cursor: pointer;
+  }
+
+/* 광고 */
+.slideshow { /* 슬라이드쇼 컨테이너 */
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    margin: 20px 16px;
+    border-radius: 20px; /* 둥근 모서리*/
+}
+
+.slide {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+img {
+  width: 100%;
+  height: auto;                                                        
+}
+
+
+/* 하단 */
+.etc {
+    padding: 5px 20px 16px 16px;
+    width: auto;
+    border-radius: 10px 10px 0px 0px;
+    background-color: #d9d9d9;
+}
+
+.etc h4 {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  font-size: 12px;
+}
+
+.maintext {
+  font-weight: normal;
+  margin: 4px 0px;
+  font-size: 12px;
+}
+
+.employee_mode_button {
+  margin-top: 4px;
+  border-radius: 2px;
+  border: 2px solid #e9e9eb;
+  background-color: #d9d9d9;
+  color: black;
+  font-size: 12px;
+}
+
+/* desktop 규격 */
+@media screen and (min-width: 1024px){
+    body{ background-color: lightblue; }
+}
+
+/* tablet 규격 */
+@media screen and (max-width: 1023px){
+    body{ background-color: pink; }
+}
+
+/* mobile 규격 */
+@media screen and (max-width: 540px){
+    
+  /* 메인서비스 */
+  .mainservice {
+    padding: 0px 1px 20px 1px;
+  }
+
+  .mainservice h3 {
+    font-size: 20px;
+    margin: 0px;
+  }
+
+  .mainservice_button img {
+    width: 64px;
+  }
+  .mainservice_button {
+    display: inline-block;
+    width: 33.33%; /* 3개씩 정렬 */
+    width: 100px; /* 최대 너비 지정 */
+    height: 100px; /* 최대 너비 지정 */
+    margin: 0px 8px; /* 좌우 마진 설정 */
+  }
+
+  .mainservice_button button {
+    width: 100%; /* 버튼의 너비 100%로 설정 */
+    height: 100%;
+    padding: 0px;
+    border-radius: 20px;
+    border-style: none;
+    background-color: white;
+    margin-top: 20px; /* 버튼 위 여백 지정 */
+  }
+
+  .mainservice_button h5 {
+    font-weight: normal;
+    margin: 4px 0px 0px 0px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+ /* 모든기기공통 CSS */
+ /* body{ background-color: red; } */
+ /* landscape - 가로 모드 */
+ @media screen and (orientation: landscape){
+    body{ background-color: red;}
+}
