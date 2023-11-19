@@ -5,6 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UserViewController {
+    // 동의화면
+    @GetMapping("/agreement")
+    public String agreementView(){
+        return "agreement";
+    }
+
+    // 회원가입화면
     @GetMapping("/signup")
     public String signupView(){
         return "signup";

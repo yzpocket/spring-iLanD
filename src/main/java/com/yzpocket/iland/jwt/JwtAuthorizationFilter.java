@@ -1,6 +1,5 @@
 package com.yzpocket.iland.jwt;
 
-import com.yzpocket.iland.exception.TokenNotValidException;
 import com.yzpocket.iland.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

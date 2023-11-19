@@ -8,7 +8,7 @@ import com.yzpocket.iland.security.UserDetailsImpl;
 import com.yzpocket.iland.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,21 +19,29 @@ public class UserController {
 
     private final UserService userService;
 
+    // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<StatusResponseDto> signup(@Valid @RequestBody UserSignupRequestDto requestDto){
+    public StatusResponseDto signup(@Valid @RequestBody UserSignupRequestDto requestDto){
         return userService.signup(requestDto);
     }
 
+    // 회원탈퇴
     @DeleteMapping("/escape")
-    public ResponseEntity<StatusResponseDto> escape(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                                    @Valid @RequestBody UserDeleteRequestDto requestDto) {
-        ResponseEntity<StatusResponseDto> escapeResult = userService.escape(userDetails.getUser(), requestDto);
-        return escapeResult;
+    public StatusResponseDto escape(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                    @Valid @RequestBody UserDeleteRequestDto requestDto) {
+        if (userDetails == null) {
+            return new StatusResponseDto("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED.value());
+        }
+        return userService.escape(userDetails.getUser(), requestDto);
     }
 
+    // 회원수정
     @PutMapping("/update")
-    public ResponseEntity<StatusResponseDto> update(@AuthenticationPrincipal UserDetailsImpl userDetails,
-                                                    @Valid @RequestBody UserUpdateRequestDto requestDto){
-        return ResponseEntity.ok().body(userService.update(userDetails.getUser(), requestDto));
+    public StatusResponseDto update(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                    @Valid @RequestBody UserUpdateRequestDto requestDto){
+        if (userDetails == null) {
+            return new StatusResponseDto("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED.value());
+        }
+        return userService.update(userDetails.getUser(), requestDto);
     }
 }

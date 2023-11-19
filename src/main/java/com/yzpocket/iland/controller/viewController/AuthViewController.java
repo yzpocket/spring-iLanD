@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AuthViewController {
+    // 로그인화면
     @GetMapping("/login")
     public String loginView(Model model) {
         SecurityContext securityContextHolder = SecurityContextHolder.getContext();

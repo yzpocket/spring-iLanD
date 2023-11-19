@@ -7,15 +7,13 @@ import com.yzpocket.iland.dto.UserUpdateRequestDto;
 import com.yzpocket.iland.entity.User;
 import com.yzpocket.iland.entity.UserRoleEnum;
 import com.yzpocket.iland.exception.DuplicateEmailException;
-//import com.yzpocket.iland.jwt.SecurityUtil;
 import com.yzpocket.iland.repository.UserRepository;
-import com.yzpocket.iland.security.UserDetailsServiceImpl;
+import com.yzpocket.iland.security.UserDetailsImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -32,7 +30,8 @@ public class UserService {
     private final String ADMIN_TOKEN = "admin";
     private final String STAFF_TOKEN = "staff";
 
-    public ResponseEntity<StatusResponseDto> signup(UserSignupRequestDto requestDto) {
+    // 회원가입
+    public StatusResponseDto signup(UserSignupRequestDto requestDto) {
         try {
             String email = requestDto.getEmail();
             String username = requestDto.getUsername();
@@ -49,30 +48,28 @@ public class UserService {
             userRepository.save(user);
 
             // 메시지와 상태 코드를 전달하여 StatusResponseDto 생성
-            StatusResponseDto responseDto = new StatusResponseDto("회원가입이 완료되었습니다.", HttpStatus.OK.value());
-
-            // ResponseEntity에 StatusResponseDto를 담아 반환
-            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+            return new StatusResponseDto("회원가입이 완료되었습니다.", HttpStatus.OK.value());
         } catch (DuplicateEmailException e) {
             // 중복된 이메일 예외 처리
-            StatusResponseDto errorResponseDto = new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value());
-            return new ResponseEntity<>(errorResponseDto, HttpStatus.BAD_REQUEST);
+            return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         } catch (IllegalArgumentException e) {
             // 기타 예외 처리
-            StatusResponseDto errorResponseDto = new StatusResponseDto(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
-            return new ResponseEntity<>(errorResponseDto, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new StatusResponseDto(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
         }
     }
 
-    public ResponseEntity<StatusResponseDto> escape(User user, UserDeleteRequestDto requestDto) {
-        // 현재 로그인한 사용자의 이메일 가져오기
+    // 회원탈퇴
+    @Transactional
+    public StatusResponseDto escape(User user, UserDeleteRequestDto requestDto) {
+        if (user == null) {
+            return new StatusResponseDto("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED.value());
+        }
+
         String email = user.getEmail();
 
-        // 사용자 비밀번호 확인
         if (!checkUserPassword(email, requestDto.getPassword1())) {
             // 비밀번호가 일치하지 않으면 에러 응답
-            StatusResponseDto errorResponseDto = new StatusResponseDto("비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED.value());
-            return new ResponseEntity<>(errorResponseDto, HttpStatus.UNAUTHORIZED);
+            return new StatusResponseDto("비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED.value());
         }
 
         // 비밀번호가 일치하면 사용자 삭제
@@ -87,27 +84,23 @@ public class UserService {
         response.addCookie(cookie);
 
         // 회원탈퇴 완료 메시지 응답
-        StatusResponseDto responseDto = new StatusResponseDto("회원탈퇴가 완료되었습니다.", HttpStatus.OK.value());
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        return new StatusResponseDto("회원탈퇴가 완료되었습니다.", HttpStatus.OK.value());
     }
 
-    @Transactional
-    public void deleteUser(String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(
-                ()->new IllegalArgumentException("해당 사용자가 존재하지 않습니다.")
-        );
 
-        userRepository.delete(user);
-    }
-
+    // UserService 클래스 내의 update 메소드 수정
     @Transactional
     public StatusResponseDto update(User user, UserUpdateRequestDto requestDto) {
-        if(!requestDto.getPassword1().equals(requestDto.getPassword2())){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        if (user == null) {
+            return new StatusResponseDto("로그인이 필요합니다.", HttpStatus.UNAUTHORIZED.value());
+        }
+
+        if (!requestDto.getPassword1().equals(requestDto.getPassword2())) {
+            return new StatusResponseDto("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST.value());
         }
 
         User updateUser = userRepository.findByEmail(user.getEmail()).orElseThrow(
-                ()->new IllegalArgumentException("해당 사용자가 존재하지 않습니다.")
+                () -> new IllegalArgumentException("해당 사용자가 존재하지 않습니다.")
         );
 
         String passwordE = passwordEncoder.encode(requestDto.getPassword1());
@@ -117,6 +110,15 @@ public class UserService {
         return new StatusResponseDto("비밀번호가 변경되었습니다.", HttpStatus.OK.value());
     }
 
+    // 모듈화 메서드
+    @Transactional
+    public void deleteUser(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(
+                ()->new IllegalArgumentException("해당 사용자가 존재하지 않습니다.")
+        );
+
+        userRepository.delete(user);
+    }
     public void passwordCheck(UserSignupRequestDto requestDto) {
         // 비밀번호1, 2 확인
         if(!requestDto.getPassword1().equals(requestDto.getPassword2())){

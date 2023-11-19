@@ -1,7 +1,7 @@
 package com.yzpocket.iland.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yzpocket.iland.dto.LoginRequestDto;
+import com.yzpocket.iland.dto.AuthLoginRequestDto;
 import com.yzpocket.iland.dto.StatusResponseDto;
 import com.yzpocket.iland.entity.UserRoleEnum;
 import com.yzpocket.iland.jwt.JwtUtil;
@@ -11,11 +11,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
@@ -39,7 +37,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 throw new RuntimeException("요청 본문이 비어 있습니다.");
             }
 
-            LoginRequestDto requestDto = new ObjectMapper().readValue(request.getInputStream(), LoginRequestDto.class);
+            AuthLoginRequestDto requestDto = new ObjectMapper().readValue(request.getInputStream(), AuthLoginRequestDto.class);
 
             return getAuthenticationManager().authenticate(
                     new UsernamePasswordAuthenticationToken(

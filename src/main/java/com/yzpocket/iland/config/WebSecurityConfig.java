@@ -3,7 +3,6 @@ package com.yzpocket.iland.config;
 import com.yzpocket.iland.jwt.JwtAuthenticationFilter;
 import com.yzpocket.iland.jwt.JwtAuthorizationFilter;
 import com.yzpocket.iland.jwt.JwtUtil;
-import com.yzpocket.iland.security.CustomLogoutSuccessHandler;
 import com.yzpocket.iland.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -28,7 +27,6 @@ public class WebSecurityConfig {
     private final JwtUtil jwtUtil;
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthenticationConfiguration authenticationConfiguration;
-    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -83,14 +81,15 @@ public class WebSecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/add-menus").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/add-menus").permitAll()
                 )
-                // 로그아웃 처리 추가 부분
-                .logout(logout -> {
-                    logout.logoutUrl("/api/auth/logout") // 로그아웃을 처리할 URL
-                            //.logoutSuccessUrl("/") // 로그아웃 성공 시 이동할 페이지 (메인 페이지로 리디렉션)
-                            .logoutSuccessHandler(customLogoutSuccessHandler) // CustomLogoutSuccessHandler <- 이부분이 msg : statuscode 반환시킴 설정
-                            .invalidateHttpSession(true) // HTTP 세션 무효화 여부
-                            .deleteCookies(JwtUtil.AUTHORIZATION_HEADER); // 로그아웃 시 삭제할 쿠키 이름
-                });
+                //// 로그아웃 처리 추가 부분
+                //.logout(logout -> {
+                //    logout.logoutUrl("/api/auth/logout") // 로그아웃을 처리할 URL
+                //            //.logoutSuccessUrl("/") // 로그아웃 성공 시 이동할 페이지 (메인 페이지로 리디렉션)
+                //            .logoutSuccessHandler(customLogoutSuccessHandler) // CustomLogoutSuccessHandler <- 이부분이 msg : statuscode 반환시킴 설정
+                //            .invalidateHttpSession(true) // HTTP 세션 무효화 여부
+                //            .deleteCookies(JwtUtil.AUTHORIZATION_HEADER); // 로그아웃 시 삭제할 쿠키 이름
+                //})
+        ;
 
 
         // 필터 관리

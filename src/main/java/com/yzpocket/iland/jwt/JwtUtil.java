@@ -138,4 +138,12 @@ public class JwtUtil {
         logger.error("Not Found Token");
         throw new NullPointerException("Not Found Token");
     }
+
+    // 쿠키에서 JWT 제거
+    public void removeJwtFromCookie(HttpServletResponse res) {
+        Cookie cookie = new Cookie(AUTHORIZATION_HEADER, null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        res.addCookie(cookie);
+    }
 }

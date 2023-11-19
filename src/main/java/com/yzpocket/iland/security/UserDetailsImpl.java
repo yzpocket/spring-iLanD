@@ -43,6 +43,10 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
+    // 로그인 여부 확인
+    public boolean isLoggedIn() {
+        return user != null;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
