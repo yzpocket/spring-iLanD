@@ -1,14 +1,12 @@
-package com.yzpocket.iland.controller;
+package com.yzpocket.iland.controller.viewController;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@RequiredArgsConstructor
-public class HomeController {
+public class HomeViewController {
     @GetMapping("/")
-    public String home(){
+    public String mainView(){
         return "iLanD_main";
     }
 }
