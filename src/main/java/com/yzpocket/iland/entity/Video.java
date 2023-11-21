@@ -24,7 +24,7 @@ public class Video extends TimeStamped {
     private String videoWriter;
 
     @Column
-    private String videoBody;
+    private String videoContents;
 
     @Column
     @Enumerated(value = EnumType.STRING)
