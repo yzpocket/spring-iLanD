@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -33,4 +36,7 @@ public class Game extends TimeStamped {
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
+
+    @OneToMany(mappedBy = "game")
+    List<File> fileList = new ArrayList<>();
 }

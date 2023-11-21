@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -34,4 +37,6 @@ public class Notice extends TimeStamped {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    @OneToMany(mappedBy = "notice")
+    List<File> fileList = new ArrayList<>();
 }
