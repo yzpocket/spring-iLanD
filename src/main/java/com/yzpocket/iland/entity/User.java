@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -31,8 +34,8 @@ public class User extends TimeStamped {
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
-    //@OneToMany(mappedBy = "boards")
-    //List<Board> boardList = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    List<Board> boardList = new ArrayList<>();
 
     public User(String email, String username, String password, UserRoleEnum role) {
         this.email=email;

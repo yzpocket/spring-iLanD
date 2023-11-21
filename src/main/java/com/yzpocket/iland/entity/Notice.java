@@ -30,8 +30,8 @@ public class Notice extends TimeStamped {
     @Enumerated(value = EnumType.STRING)
     private NoticeTypeEnum noticeType;
 
-    //@ManyToOne
-    //@JoinColumn(name = "board_id")
-    //private Board board;
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
 
 }

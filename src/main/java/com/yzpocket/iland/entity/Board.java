@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Builder
 @AllArgsConstructor
@@ -28,6 +31,6 @@ public class Board extends TimeStamped{
     @JoinColumn(name = "user_id")
     private User user;
 
-    //@OneToMany(mappedBy = "notice")
-    //List<Notice> noticeList = new ArrayList<>();
+    @OneToMany(mappedBy = "board")
+    List<Notice> noticeList = new ArrayList<>();
 }
