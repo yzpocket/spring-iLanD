@@ -39,4 +39,7 @@ public class Board extends TimeStamped{
 
     @OneToMany(mappedBy = "board")
     List<Info> infoList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    List<Info> gameList = new ArrayList<>();
 }
