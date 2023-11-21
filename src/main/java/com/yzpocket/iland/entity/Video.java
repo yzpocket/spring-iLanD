@@ -14,29 +14,29 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Table(name = "infos")
-public class Info extends TimeStamped {
+@Table(name = "videos")
+public class Video extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long infoId;
+    private Long videoId;
 
     @Column
-    private String infoTitle;
+    private String videoTitle;
 
     @Column
-    private String infoWriter;
+    private String videoWriter;
 
     @Column
-    private String infoContents;
+    private String videoContents;
 
     @Column
     @Enumerated(value = EnumType.STRING)
-    private InfoTypeEnum infoType;
+    private VideoTypeEnum videoType;
 
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @OneToMany(mappedBy = "info")
+    @OneToMany(mappedBy = "video")
     List<File> fileList = new ArrayList<>();
 }

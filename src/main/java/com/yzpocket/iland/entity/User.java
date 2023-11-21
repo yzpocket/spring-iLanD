@@ -6,11 +6,15 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity(name = "users")
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Table(name = "users")
 public class User extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +33,9 @@ public class User extends TimeStamped {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
+
+    @OneToMany(mappedBy = "user")
+    List<Board> boardList = new ArrayList<>();
 
     public User(String email, String username, String password, UserRoleEnum role) {
         this.email=email;
