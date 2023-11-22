@@ -1,5 +1,6 @@
 package com.yzpocket.iland.entity;
 
+import com.yzpocket.iland.dto.NoticeUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,5 +47,12 @@ public class Notice extends TimeStamped {
         this.noticeWriter = writer;
         this.noticeContents = contents;
         this.board = board;
+    }
+
+    public void update(NoticeUpdateRequestDto requestDto) {
+        this.noticeTitle = requestDto.getNoticeTitle();
+        this.noticeType = requestDto.getNoticeType();
+        this.noticeWriter = requestDto.getNoticeWriter();
+        this.noticeContents = requestDto.getNoticeContents();
     }
 }
