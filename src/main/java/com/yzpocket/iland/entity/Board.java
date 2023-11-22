@@ -42,4 +42,9 @@ public class Board extends TimeStamped{
 
     @OneToMany(mappedBy = "board")
     List<Info> gameList = new ArrayList<>();
+
+    public Board(String title, BoardTypeEnum type){
+        this.title = title;
+        this.type = type;
+    }
 }
