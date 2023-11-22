@@ -39,4 +39,12 @@ public class Notice extends TimeStamped {
 
     @OneToMany(mappedBy = "notice")
     List<File> fileList = new ArrayList<>();
+
+    public Notice(String title, NoticeTypeEnum type, String writer, String contents, Board board) {
+        this.noticeTitle = title;
+        this.noticeType = type;
+        this.noticeWriter = writer;
+        this.noticeContents = contents;
+        this.board = board;
+    }
 }
