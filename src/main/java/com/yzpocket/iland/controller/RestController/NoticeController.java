@@ -25,4 +25,10 @@ public class NoticeController {
                                           @PathVariable Long noticeId){
         return noticeService.updateNotice(requestDto, noticeId);
     }
+
+    // 공지글 삭제
+    @DeleteMapping("/delete/{noticeId}")
+    public StatusResponseDto deleteNotice(@PathVariable Long noticeId){
+        return noticeService.deleteNotice(noticeId);
+    }
 }

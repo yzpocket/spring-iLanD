@@ -43,6 +43,15 @@ public class NoticeService {
         return new StatusResponseDto("공지글이 수정되었습니다.", HttpStatus.OK.value());
     }
 
+    // 공지글 삭제
+    @Transactional
+    public StatusResponseDto deleteNotice(Long noticeId) {
+        Notice deleteNotice = findNoticeById(noticeId);
+        noticeRepository.delete(deleteNotice);
+
+        return new StatusResponseDto("공지글이 삭제되었습니다.", HttpStatus.OK.value());
+    }
+
     // 공통으로 사용할 공지글 찾기 메서드
     public Notice findNoticeById(Long noticeId) {
         return noticeRepository.findById(noticeId)
