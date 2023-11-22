@@ -1,5 +1,6 @@
 package com.yzpocket.iland.entity;
 
+import com.yzpocket.iland.dto.BoardUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,4 +43,14 @@ public class Board extends TimeStamped{
 
     @OneToMany(mappedBy = "board")
     List<Info> gameList = new ArrayList<>();
+
+    public Board(String title, BoardTypeEnum type){
+        this.title = title;
+        this.type = type;
+    }
+
+    public void update(BoardUpdateRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.type = requestDto.getType();
+    }
 }
