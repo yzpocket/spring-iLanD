@@ -1,6 +1,7 @@
 package com.yzpocket.iland.service;
 
 import com.yzpocket.iland.dto.NoticeCreateRequestDto;
+import com.yzpocket.iland.dto.NoticeResponseDto;
 import com.yzpocket.iland.dto.NoticeUpdateRequestDto;
 import com.yzpocket.iland.dto.StatusResponseDto;
 import com.yzpocket.iland.entity.Board;
@@ -9,6 +10,10 @@ import com.yzpocket.iland.entity.NoticeTypeEnum;
 import com.yzpocket.iland.repository.NoticeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +37,22 @@ public class NoticeService {
         noticeRepository.save(notice);
 
         return new StatusResponseDto("공지글이 생성되었습니다.", HttpStatus.OK.value());
+    }
+
+    // 공지글 전체 조회 + 페이징
+    public Page<NoticeResponseDto> getAllNotices(int page) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "noticeId");
+        Pageable pageable = PageRequest.of(page, 20, sort);
+
+        Page<Notice> noticeList = noticeRepository.findAll(pageable);
+        return noticeList.map(NoticeResponseDto::new);
+    }
+
+    // 공지글 선택 조회
+    public NoticeResponseDto getNoticeById(Long noticeId) {
+        Notice notice = noticeRepository.findById(noticeId).orElseThrow(
+                ()->new NullPointerException("선택한 공지가 없습니다."));
+        return new NoticeResponseDto(notice);
     }
 
     // 공지글 수정
