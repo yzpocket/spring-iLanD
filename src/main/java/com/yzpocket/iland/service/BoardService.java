@@ -36,4 +36,15 @@ public class BoardService {
 
         return new StatusResponseDto("게시판이 수정되었습니다.", HttpStatus.OK.value());
     }
+
+    // 게시판 삭제
+    @Transactional
+    public StatusResponseDto deleteBoard(Long boardId){
+        Board deleteBoard = boardRepository.findById(boardId).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시판이 존재하지 않습니다.")
+        );
+        boardRepository.delete(deleteBoard);
+
+        return new StatusResponseDto("게시판이 삭제되었습니다.", HttpStatus.OK.value());
+    }
 }

@@ -26,4 +26,10 @@ public class BoardController {
                                          @PathVariable Long boardId){
         return boardService.updateBoard(requestDto, boardId);
     }
+
+    // 게시판 삭제
+    @DeleteMapping("/delete/{boardId}")
+    public StatusResponseDto deleteBoard(@PathVariable Long boardId){
+        return boardService.deleteBoard(boardId);
+    }
 }
