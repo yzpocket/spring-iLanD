@@ -2,12 +2,12 @@ package com.yzpocket.iland.controller.RestController;
 
 import com.yzpocket.iland.dto.StatusResponseDto;
 import com.yzpocket.iland.dto.VideCreateRequestDto;
+import com.yzpocket.iland.dto.VideoResponseDto;
 import com.yzpocket.iland.service.VideoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/boards/video")
@@ -19,5 +19,17 @@ public class VideoController {
     @PostMapping("/create")
     public StatusResponseDto createVideo(@RequestBody VideCreateRequestDto requestDto){
         return videoService.createVideo(requestDto);
+    }
+
+    // 비디오 전체 조회
+    @GetMapping("/all")
+    public ResponseEntity<Page<VideoResponseDto>> getAllVideos(@RequestParam("page") int page) {
+        return ResponseEntity.ok(videoService.getAllVideos(page - 1));
+    }
+
+    // 비디오 선택 조회
+    @GetMapping("/{videoId}")
+    public ResponseEntity<VideoResponseDto> getVideoById(@PathVariable Long videoId) {
+        return ResponseEntity.ok(videoService.getVideoById(videoId));
     }
 }
