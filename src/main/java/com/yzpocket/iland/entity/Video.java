@@ -39,4 +39,12 @@ public class Video extends TimeStamped {
 
     @OneToMany(mappedBy = "video")
     List<File> fileList = new ArrayList<>();
+
+    public Video(String title, VideoTypeEnum type, String writer, String contents, Board board) {
+        this.videoTitle = title;
+        this.videoType = type;
+        this.videoWriter = writer;
+        this.videoContents = contents;
+        this.board = board;
+    }
 }
