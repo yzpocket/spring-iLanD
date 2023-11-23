@@ -40,4 +40,10 @@ public class VideoController {
                                          @PathVariable Long videoId){
         return videoService.updateVideo(requestDto, videoId);
     }
+
+    // 비디오 삭제
+    @DeleteMapping("/delete/{videoId}")
+    public StatusResponseDto deleteVideo(@PathVariable Long videoId){
+        return videoService.deleteVideo(videoId);
+    }
 }

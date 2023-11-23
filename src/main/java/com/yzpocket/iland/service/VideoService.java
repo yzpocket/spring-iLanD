@@ -64,6 +64,15 @@ public class VideoService {
         return new StatusResponseDto("영상이 수정되었습니다.", HttpStatus.OK.value());
     }
 
+    // 비디오 삭제
+    @Transactional
+    public StatusResponseDto deleteVideo(Long videoId) {
+        Video deleteVideo = findVideoById(videoId);
+        videoRepository.delete(deleteVideo);
+
+        return new StatusResponseDto("영상이 삭제되었습니다.", HttpStatus.OK.value());
+    }
+
     // 공통으로 사용할 공지글 찾기 메서드
     public Video findVideoById(Long videoId) {
         return videoRepository.findById(videoId)
