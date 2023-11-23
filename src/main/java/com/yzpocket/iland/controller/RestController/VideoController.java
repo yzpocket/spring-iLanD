@@ -3,6 +3,7 @@ package com.yzpocket.iland.controller.RestController;
 import com.yzpocket.iland.dto.StatusResponseDto;
 import com.yzpocket.iland.dto.VideCreateRequestDto;
 import com.yzpocket.iland.dto.VideoResponseDto;
+import com.yzpocket.iland.dto.VideoUpdateRequestDto;
 import com.yzpocket.iland.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,5 +32,12 @@ public class VideoController {
     @GetMapping("/{videoId}")
     public ResponseEntity<VideoResponseDto> getVideoById(@PathVariable Long videoId) {
         return ResponseEntity.ok(videoService.getVideoById(videoId));
+    }
+
+    // 비디오 수정
+    @PutMapping("/update/{videoId}")
+    public StatusResponseDto updatevideo(@RequestBody VideoUpdateRequestDto requestDto,
+                                         @PathVariable Long videoId){
+        return videoService.updateVideo(requestDto, videoId);
     }
 }

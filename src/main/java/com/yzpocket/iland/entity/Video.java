@@ -1,5 +1,6 @@
 package com.yzpocket.iland.entity;
 
+import com.yzpocket.iland.dto.VideoUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,5 +47,12 @@ public class Video extends TimeStamped {
         this.videoWriter = writer;
         this.videoContents = contents;
         this.board = board;
+    }
+
+    public void update(VideoUpdateRequestDto requestDto) {
+        this.videoTitle = requestDto.getVideoTitle();
+        this.videoType = requestDto.getVideoType();
+        this.videoWriter = requestDto.getVideoWriter();
+        this.videoContents = requestDto.getVideoContents();
     }
 }
