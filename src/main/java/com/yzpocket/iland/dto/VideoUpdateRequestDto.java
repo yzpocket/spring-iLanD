@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class VideoUpdateRequestDto {
-    private String VideoTitle;
+    private String videoTitle;
 
     private String videoWriter;
 

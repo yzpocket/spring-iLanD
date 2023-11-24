@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class VideCreateRequestDto {
+public class VideoCreateRequestDto {
     private String videoTitle;
 
     private String videoWriter;

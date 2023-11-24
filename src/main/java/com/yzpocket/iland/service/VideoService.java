@@ -1,7 +1,7 @@
 package com.yzpocket.iland.service;
 
 import com.yzpocket.iland.dto.StatusResponseDto;
-import com.yzpocket.iland.dto.VideCreateRequestDto;
+import com.yzpocket.iland.dto.VideoCreateRequestDto;
 import com.yzpocket.iland.dto.VideoResponseDto;
 import com.yzpocket.iland.dto.VideoUpdateRequestDto;
 import com.yzpocket.iland.entity.Board;
@@ -25,7 +25,7 @@ public class VideoService {
     private final BoardService boardService;
 
     // 비디오 생성
-    public StatusResponseDto createVideo(VideCreateRequestDto requestDto){
+    public StatusResponseDto createVideo(VideoCreateRequestDto requestDto){
         String title = requestDto.getVideoTitle();
         VideoTypeEnum type = requestDto.getVideoType();
         String writer = requestDto.getVideoWriter();
