@@ -1,5 +1,6 @@
 package com.yzpocket.iland.entity;
 
+import com.yzpocket.iland.dto.InfoUpdateRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,4 +40,19 @@ public class Info extends TimeStamped {
 
     @OneToMany(mappedBy = "info")
     List<File> fileList = new ArrayList<>();
+
+    public Info(String title, InfoTypeEnum type, String writer, String contents, Board board) {
+        this.infoTitle = title;
+        this.infoType = type;
+        this.infoWriter = writer;
+        this.infoContents = contents;
+        this.board = board;
+    }
+
+    public void update(InfoUpdateRequestDto requestDto) {
+        this.infoTitle = requestDto.getInfoTitle();
+        this.infoType = requestDto.getInfoType();
+        this.infoWriter = requestDto.getInfoWriter();
+        this.infoContents = requestDto.getInfoContents();
+    }
 }

@@ -1,7 +1,7 @@
 package com.yzpocket.iland.controller.RestController;
 
 import com.yzpocket.iland.dto.StatusResponseDto;
-import com.yzpocket.iland.dto.VideCreateRequestDto;
+import com.yzpocket.iland.dto.VideoCreateRequestDto;
 import com.yzpocket.iland.dto.VideoResponseDto;
 import com.yzpocket.iland.dto.VideoUpdateRequestDto;
 import com.yzpocket.iland.service.VideoService;
@@ -18,7 +18,7 @@ public class VideoController {
 
     // 비디오 생성
     @PostMapping("/create")
-    public StatusResponseDto createVideo(@RequestBody VideCreateRequestDto requestDto){
+    public StatusResponseDto createVideo(@RequestBody VideoCreateRequestDto requestDto){
         return videoService.createVideo(requestDto);
     }
 
