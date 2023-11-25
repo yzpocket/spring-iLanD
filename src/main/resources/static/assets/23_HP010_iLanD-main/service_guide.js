@@ -18,7 +18,7 @@ function closePage() {
 const closeBtn = document.querySelector('.close-btn');
 closeBtn.addEventListener('click', function () {
     closePage();
-    window.location.href = 'iLanD_main.html';
+    window.location.href = '/';
 });
 
 
