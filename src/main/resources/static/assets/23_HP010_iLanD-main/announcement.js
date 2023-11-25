@@ -27,10 +27,12 @@ function displayNotices(notices) {
         noticeElement.classList.add('announcement-list');
 
         noticeElement.innerHTML = `
-            <div class="h5 fw-bolder" style="padding-top: 15px" onclick="showNoticeContent(${notice.noticeId})">✅ ${notice.noticeTitle}</div>
-            <div class="date" style="padding-bottom: 15px" onclick="showNoticeContent(${notice.noticeId})">🕐 공지일 : ${notice.formattedCreatedAt}</div>
-            <div class="notice-content" id="content-${notice.noticeId}" style=" display: none;"></div>
-            <input type="hidden" id="notice-id-${notice.noticeId}" value=" ${notice.noticeId}">
+            <div class="card" style="padding: 15px" >
+                <div class="card" style="padding: 10px; background-color: #f8f9fa" onclick="showNoticeContent(${notice.noticeId})">✅ ${notice.noticeTitle}</div>
+                <div class="date" style="padding: 10px" onclick="showNoticeContent(${notice.noticeId})">🕐 공지일 : ${notice.formattedCreatedAt}</div>
+                <div class="notice-content" id="content-${notice.noticeId}" style=" display: none;"></div>
+                <input type="hidden" id="notice-id-${notice.noticeId}" value=" ${notice.noticeId}">
+            </div>
         `;
 
         if (notice.noticeType === 'IMPORTANT') {
@@ -55,8 +57,11 @@ async function showNoticeContent(noticeId) {
 
         // 가져온 공지글 정보를 화면에 표시
         contentElement.innerHTML = `
-            <p>👤 작성자: ${notice.noticeWriter}</p>
-            <p>🗒️ ${notice.noticeContents}</p>
+            <div>
+                <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
+                <div style="padding: 10px">🗒️ 내&nbsp&nbsp&nbsp용 : </div>
+                <div style="padding-left: 20px">${notice.noticeContents}</div>
+            </div>
         `;
 
         contentElement.style.display = 'block';
