@@ -27,7 +27,7 @@ body {
 }
 img {
   width: 100%;
-  height: auto;                                                        
+  height: auto;
 }
 
 
@@ -76,6 +76,7 @@ img {
     
   /* 메인서비스 */
   .mainservice {
+      width: auto;
     padding: 0px 1px 20px 1px;
   }
 

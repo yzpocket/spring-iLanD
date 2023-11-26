@@ -674,11 +674,12 @@ progress {
     margin-top: calc(-1 * var(--bs-gutter-y));
     margin-right: calc(-0.5 * var(--bs-gutter-x));
     margin-left: calc(-0.5 * var(--bs-gutter-x));
+    justify-content: space-evenly;
 }
 .row > * {
     flex-shrink: 0;
     width: 100%;
-    max-width: 100%;
+    max-width: 50%;
     padding-right: calc(var(--bs-gutter-x) * 0.5);
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-top: var(--bs-gutter-y);
@@ -4526,7 +4527,6 @@ textarea.form-control-lg {
     --bs-pagination-disabled-bg: #fff;
     --bs-pagination-disabled-border-color: #dee2e6;
     display: flex;
-    padding-left: 0;
     list-style: none;
 }
 
@@ -10838,4 +10838,17 @@ textarea.form-control-lg {
     height: 4rem;
     width: 4rem;
     font-size: 2rem;
+}
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* 원하는 배경색으로 변경하세요. */
+}
+
+@media (min-width: 992px) {
+    .col-sm-5 {
+        flex: 0 0 33.3333%; /* col-sm-4에 해당하는 33.3333%의 너비로 설정 */
+        max-width: 33.3333%;
+    }
 }
