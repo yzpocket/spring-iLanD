@@ -4,23 +4,34 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getAllNotices() {
-    // Ajax로 서버에 공지글 데이터 요청
-    fetch('/api/boards/notice/all?page=1')
+    // 일반 공지글 가져오기
+    fetch(`/api/boards/notice/all`)
         .then(response => response.json())
         .then(data => {
             // 데이터를 받아와서 처리하는 로직 추가
-            displayNotices(data.content);
+            displayNotices(data.content, '.announcement_area');
+        })
+        .catch(error => console.error('Error:', error));
+
+    // 중요 공지글 가져오기
+    fetchAllImportantNotices();
+}
+
+function fetchAllImportantNotices() {
+    fetch(`/api/boards/notice/important`)
+        .then(response => response.json())
+        .then(data => {
+            // 데이터를 받아와서 처리하는 로직 추가
+            displayNotices(data.content, '.announcement_important');
         })
         .catch(error => console.error('Error:', error));
 }
 
-function displayNotices(notices) {
-    const announcementArea = document.querySelector('.announcement_area');
-    const importantArea = document.querySelector('.announcement_important');
+function displayNotices(notices, containerSelector) {
+    const container = document.querySelector(containerSelector);
 
     // 초기화
-    announcementArea.innerHTML = '';
-    importantArea.innerHTML = '';
+    container.innerHTML = '';
 
     notices.forEach(notice => {
         const noticeElement = document.createElement('div');
@@ -29,17 +40,13 @@ function displayNotices(notices) {
         noticeElement.innerHTML = `
             <div class="card" style="padding: 15px" >
                 <div class="card" style="padding: 10px; background-color: #f8f9fa" onclick="showNoticeContent(${notice.noticeId})">✅ ${notice.noticeTitle}</div>
-                <div class="date" style="padding: 10px" onclick="showNoticeContent(${notice.noticeId})">🕐 공지일 : ${notice.formattedCreatedAt}</div>
+                <div class="date" style="padding: 10px" onclick="showNoticeContent(${notice.noticeId})">🕐 공지일 : ${notice.formattedCreatedAt || notice.createdAt}</div>
                 <div class="notice-content" id="content-${notice.noticeId}" style=" display: none;"></div>
                 <input type="hidden" id="notice-id-${notice.noticeId}" value=" ${notice.noticeId}">
             </div>
         `;
 
-        if (notice.noticeType === 'IMPORTANT') {
-            importantArea.appendChild(noticeElement);
-        } else {
-            announcementArea.appendChild(noticeElement);
-        }
+        container.appendChild(noticeElement);
     });
 }
 
@@ -67,4 +74,3 @@ async function showNoticeContent(noticeId) {
         contentElement.style.display = 'block';
     }
 }
-

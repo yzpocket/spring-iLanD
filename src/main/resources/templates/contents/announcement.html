@@ -64,15 +64,33 @@
         <div class="card-body announcement_area">
 
         </div>
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <!-- 현재 페이지 번호가 10 이상일 경우, 이전 페이지 그룹의 첫 번째 페이지로 이동 -->
+
+                <li class="page-item" th:if="${(currentPage / 10 ) * 10 > 0}">
+                    <a class="page-link" th:href="@{/announcement?page=} + ${(currentPage / 10 - 1) * 10}" aria-label="Go to the first page of the next group">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+
+                <!-- 현재 페이지 그룹의 페이지 번호들을 표시. 현재 페이지 번호 기준으로 10개 페이지를 표시 -->
+                <li th:each="pageNumber : ${#numbers.sequence((currentPage / 10) * 10, (currentPage / 10) * 10 + 9)}"
+                    th:if="${pageNumber < totalPages}"
+                    class="page-item"
+                    th:class="${pageNumber == currentPage ? 'active' : ''}">
+                    <a class="page-link" th:href="@{/announcement?page=} + ${pageNumber}" th:text="${pageNumber + 1}"></a>
+                </li>
+
+                <!-- 현재 페이지 그룹의 마지막 페이지가 전체 페이지 수보다 작을 경우, 다음 페이지 그룹의 첫 번째 페이지로 이동 -->
+                <li class="page-item" th:if="${(currentPage / 10 + 1) * 10 < totalPages}">
+                    <a class="page-link" th:href="@{/announcement?page=} + ${(currentPage / 10 + 1) * 10}" aria-label="Go to the first page of the next group">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    
-    <div class="number">
-        <li><img width="14" height="14" src="https://img.icons8.com/ios/50/double-left.png" alt="double-left"/>
-            <img width="14" height="14" src="https://img.icons8.com/ios/50/back--v1.png" alt="back--v1"/>
-            <span class="bold">1</span> 2 3 4 5
-            <img width="14" height="14" src="https://img.icons8.com/ios/50/forward--v1.png" alt="forward--v1"/>
-            <img width="14" height="14" src="https://img.icons8.com/ios/50/double-right.png" alt="double-right"/>
-        </li>
-    </div>
+
 </body>
 </html>

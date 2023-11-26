@@ -24,14 +24,22 @@ public class NoticeController {
 
     // 공지글 전체 조회
     @GetMapping("/all")
-    public ResponseEntity<Page<NoticeResponseDto>> getAllNotices(@RequestParam("page") int page) {
-        return ResponseEntity.ok(noticeService.getAllNotices(page - 1));
+    public ResponseEntity<Page<NoticeResponseDto>> getAllNotices(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                 @RequestParam(name = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(noticeService.getAllNotices(page, size));
     }
 
     // 공지글 선택 조회
     @GetMapping("/{noticeId}")
     public ResponseEntity<NoticeResponseDto> getNoticeById(@PathVariable Long noticeId) {
         return ResponseEntity.ok(noticeService.getNoticeById(noticeId));
+    }
+
+    // 중요공지만 조회
+    @GetMapping("/important")
+    public ResponseEntity<Page<NoticeResponseDto>> getImportantNotices() {
+        Page<NoticeResponseDto> importantNotices = noticeService.getImportantNotices();
+        return ResponseEntity.ok(importantNotices);
     }
 
     // 공지글 수정
