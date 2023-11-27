@@ -51,9 +51,42 @@ function showNoticeContent(noticeId) {
                 contentElement.html(`
                     <div>
                         <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
-                        <div style="padding: 10px">🗒️ 내&nbsp&nbsp&nbsp용 : </div>
-                        <div style="padding-left: 20px">${notice.noticeContents}</div>
                     </div>
+                    <form style="width: 100%" id="modifyForm">
+                        <input type="hidden" name="boardId" id="boardId" value="1">
+        
+                        <div class="d-flex mt-3 gap-2 align-items-end">
+                            <div class="flex-grow-1">
+                                <label for="noticeTitle" class="form-label">수정 할 제목</label>
+                                <input type="text" name="modifyTitle" class="form-control" value='${notice.noticeTitle}' placeholder="제목 입력">
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3 gap-2 align-items-end">
+                            <div class="flex-grow-1">
+                                <label for="modifyType" class="form-label">수정 할 타입</label>
+                                <select name="modifyType" class="form-select">
+                                    <option value="NORMAL" ${notice.noticeType === 'NORMAL' ? 'selected' : ''}>일반</option>
+                                    <option value="IMPORTANT" ${notice.noticeType === 'IMPORTANT' ? 'selected' : ''}>중요</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3 gap-2 align-items-end">
+                            <div class="flex-grow-1">
+                                <label for="modifyContents" class="form-label">수정 할 내용</label>
+                                <textarea name="modifyContents" class="form-control" rows="3">${notice.noticeContents}</textarea>
+                            </div>
+                        </div>
+                        <div class="mt-3 d-flex gap-2">
+                            <div>
+                                <label for="f_photo" class="form-label">이미지</label>
+                                <input type="file" name="photo" id="f_photo" class="form-control"> <!-- 이미지 여러 개 일 경우 : multiple 추가 -->
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3 d-flex gap-2">
+                            <button type="button" class="btn btn-success w-25" onclick="modifyNotice(${noticeId})">글수정</button>
+                            <button type="button" class="btn btn-danger w-25" onclick="deleteNotice(${noticeId})">글삭제</button>
+                        </div>
+                    </form>
                 `);
 
                 contentElement.css('display', 'block');
@@ -67,8 +100,8 @@ function showNoticeContent(noticeId) {
 
 function createNotice() {
     // 폼 필드에서 값을 읽어와서 변수에 저장
-    const boardId = $('#f_boardId').val();
-    const writer = "ADMIN";
+    const boardId = $('#boardId').val();
+    const writer = "관리자";
     const title = $('#noticeTitle').val();
     const type = $('#noticeType').val();
     const contents = $('#noticeContents').val();
@@ -93,6 +126,53 @@ function createNotice() {
         },
         error: function (xhr, status, error) {
             alert('공지 추가 실패!');
+            console.error('Error:', error);
+        }
+    });
+}
+
+function modifyNotice(noticeId) {
+    const noticeElement = $(`#notice-id-${noticeId}`).closest('.announcement-list');
+    const writer = "ADMIN";
+    const type = noticeElement.find('select[name="modifyType"]').val();
+    const title = noticeElement.find('input[name="modifyTitle"]').val();
+    const contents = noticeElement.find('textarea[name="modifyContents"]').val();
+
+
+    const requestData = {
+        noticeType: type,
+        noticeWriter: writer,
+        noticeTitle: title,
+        noticeContents: contents
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: '/api/boards/notice/update/' + noticeId,
+        data: JSON.stringify(requestData),
+        contentType: 'application/json;charset=UTF-8',
+        dataType: 'json',
+        success: function (response) {
+            alert('공지 수정 성공!');
+            window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            alert('공지 수정 실패!');
+            console.error('Error:', error);
+        }
+    });
+}
+
+function deleteNotice(noticeId) {
+    $.ajax({
+        type: 'DELETE',
+        url: `/api/boards/notice/delete/${noticeId}`,
+        success: function (response) {
+            alert('공지 삭제 성공!');
+            window.location.reload();
+        },
+        error: function (xhr, status, error) {
+            alert('공지 삭제 실패!');
             console.error('Error:', error);
         }
     });
