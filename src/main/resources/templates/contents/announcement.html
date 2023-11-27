@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav.css">
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/announcement.css">
     <link href="css/style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Announcement</title>
 </head>
 <body>
@@ -91,6 +92,10 @@
             </ul>
         </div>
     </div>
-
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let currentPage = [[${currentPage}]];
+    /*]]>*/
+</script>
 </body>
 </html>

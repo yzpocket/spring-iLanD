@@ -134,9 +134,9 @@ body {background-color: white;
 }
 
 /* 표를 3등분으로 나누기 */
-.management-box td:nth-child(3),
-.management-box td:nth-child(4),
-.management-box td:nth-child(5) {
+.management-box td:nth-child(1),
+.management-box td:nth-child(2),
+.management-box td:nth-child(3) {
     width: 33.33%; /* 각 열 너비를 테이블 너비의 1/3로 설정 */
 }
 

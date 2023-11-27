@@ -18,7 +18,7 @@ public class NoticeViewController {
     public String getAllNotices(@RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "5") int size,
                                 Model model) {
-        Page<NoticeResponseDto> noticePage = noticeService.getAllNotices(page, size);
+        Page<NoticeResponseDto> noticePage = noticeService.getNormalNotices(page, size);
         model.addAttribute("currentPage", noticePage.getNumber());
         model.addAttribute("totalPages", noticePage.getTotalPages());
         model.addAttribute("notices", noticePage.getContent());
