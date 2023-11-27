@@ -29,6 +29,13 @@ public class NoticeController {
         return ResponseEntity.ok(noticeService.getAllNotices(page, size));
     }
 
+    // 일반 공지글 조회
+    @GetMapping("/normal")
+    public ResponseEntity<Page<NoticeResponseDto>> getNormalNotices(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                 @RequestParam(name = "size", defaultValue = "5") int size) {
+        return ResponseEntity.ok(noticeService.getNormalNotices(page, size));
+    }
+
     // 공지글 선택 조회
     @GetMapping("/{noticeId}")
     public ResponseEntity<NoticeResponseDto> getNoticeById(@PathVariable Long noticeId) {

@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getAllNotices() {
-    // 일반 공지글 가져오기
-    fetch(`/api/boards/notice/normal?page=${currentPage}`)
+    // 모든 공지글 가져오기
+    fetch(`/api/boards/notice/all?page=${currentPage}`)
         .then(response => response.json())
         .then(data => {
             // 데이터를 받아와서 처리하는 로직 추가
@@ -13,18 +13,6 @@ function getAllNotices() {
         })
         .catch(error => console.error('Error:', error));
 
-    // 중요 공지글 가져오기
-    fetchAllImportantNotices();
-}
-
-function fetchAllImportantNotices() {
-    fetch(`/api/boards/notice/important`)
-        .then(response => response.json())
-        .then(data => {
-            // 데이터를 받아와서 처리하는 로직 추가
-            displayNotices(data.content, '.announcement_important');
-        })
-        .catch(error => console.error('Error:', error));
 }
 
 function displayNotices(notices, containerSelector) {
@@ -74,3 +62,36 @@ async function showNoticeContent(noticeId) {
         contentElement.style.display = 'block';
     }
 }
+$(document).ready(function() {
+    window.createNotice = function () {
+        const boardId = $('#boardId').val();
+        const writer = "ADMIN";
+        const title = $('#noticeTitle').val();
+        const type = $('#noticeType').val();
+        const contents = $('#noticeContents').val();
+
+        const requestData = {
+            boardId: boardId,
+            noticeWriter: writer,
+            noticeTitle: title,
+            noticeType: type,
+            noticeContents: contents
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/boards/notice/create',
+            data: JSON.stringify(requestData),
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            success: function (response) {
+                alert('공지 추가 성공!');
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert('공지 추가 실패!');
+                console.error('Error:', error);
+            }
+        });
+    };
+})

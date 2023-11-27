@@ -41,13 +41,20 @@ public class NoticeService {
 
     // 공지글 전체 조회 + 페이징
     public Page<NoticeResponseDto> getAllNotices(int page, int size) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "noticeId");
+        Sort sort = Sort.by(Sort.Direction.DESC, "noticeId");
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Notice> noticeList = noticeRepository.findByNoticeTypeAndBoardNotNull(NoticeTypeEnum.NONE, pageable);
+        Page<Notice> noticeList = noticeRepository.findAll(pageable);
         return noticeList.map(NoticeResponseDto::new);
     }
+    // 공지글 전체 조회 + 페이징
+    public Page<NoticeResponseDto> getNormalNotices(int page, int size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "noticeId");
+        Pageable pageable = PageRequest.of(page, size, sort);
 
+        Page<Notice> noticeList = noticeRepository.findByNoticeTypeAndBoardNotNull(NoticeTypeEnum.NORMAL, pageable);
+        return noticeList.map(NoticeResponseDto::new);
+    }
     // 중요 공지 조회
     public Page<NoticeResponseDto> getImportantNotices() {
         Page<Notice> importantNoticeList = noticeRepository.findByNoticeTypeAndBoardNotNull(NoticeTypeEnum.IMPORTANT, Pageable.unpaged());

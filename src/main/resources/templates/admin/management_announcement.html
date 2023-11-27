@@ -5,24 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav_employee.css">
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/management_announcement.css">
-    <title>management announcement</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link href="css/style.css" rel="stylesheet" />
+    <title>Management announcement</title>
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="nav_menu">
-          <li><a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a></li>
-          <div class="menu_icon_group">
-            <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
-            <li><a href="/"><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/96/exit--v1.png" alt="exit--v1"/></a></li>
-          </div>
-        </ul>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-white">
+        <div class="container px-9">
+            <a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a>
+            <h5> Management announcement </h5>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/movies&tv">Movies&TV</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/game">Game</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chatting">Chatting</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/announcement">Announcement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/aboutus_page">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/service_guide">Service Guide</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login(Staffs&Admin)</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/assets/23_HP010_iLanD-main/nav.js"></script>
     <script src="/assets/23_HP010_iLanD-main/nav_employee.js"></script>
-    <input type="text" name="" id="" placeholder="공지사항을 입력하세요.">
-    <label for="check">
-        <input type="checkbox" name="" id="" placeholder="중요 공지">
-        중요 공지
-    </label>
-    <input type="submit" value="save">
+    <script src="/assets/23_HP010_iLanD-main/management_announcement.js"></script>
+
+
+    <div class="card mb-4">
+        <div class="card-header" style="background-color: #EFF4F9">
+            새 공지사항 작성
+        </div>
+        <div class="d-flex justify-content-center" style="padding-bottom: 20px">
+            <form style="width: 70%">
+                <input type="hidden" name="boardId" id="boardId" value="1">
+
+                <div class="d-flex mt-3 gap-2 align-items-end">
+                    <div class="flex-grow-1">
+                        <label for="noticeTitle" class="form-label">제목</label>
+                        <input type="text" name="noticeTitle" class="form-control" id="noticeTitle" placeholder="제목 입력">
+                    </div>
+                </div>
+                <div class="d-flex mt-3 gap-2 align-items-end">
+                    <div class="flex-grow-1">
+                        <label for="noticeType" class="form-label">타입</label>
+                        <select name="noticeType" class="form-select" id="noticeType">
+                            <option value="NORMAL">일반</option>
+                            <option value="IMPORTANT">중요</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex mt-3 gap-2 align-items-end">
+                    <div class="flex-grow-1">
+                        <label for="noticeContents" class="form-label">내용</label>
+                        <textarea name="noticeContents" class="form-control" id="noticeContents" placeholder="내용 입력" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="mt-3 d-flex gap-2">
+                    <div>
+                        <label for="f_photo" class="form-label">이미지</label>
+                        <input type="file" name="photo" id="f_photo" class="form-control"> <!-- 이미지 여러 개 일 경우 : multiple 추가 -->
+                    </div>
+                </div>
+                <div class="mt-3 d-flex gap-2">
+                    <button type="button" class="btn btn-primary w-50" onclick="createNotice()">글작성</button>
+                    <button type="button" class="btn btn-outline-secondary w-50">리셋</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header" style="background-color: #EFF4F9">
+            공지사항 전체목록
+        </div>
+        <div class="card-body announcement_area">
+
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <ul class="pagination">
+                <!-- 현재 페이지 번호가 10 이상일 경우, 이전 페이지 그룹의 첫 번째 페이지로 이동 -->
+
+                <li class="page-item" th:if="${(currentPage / 10 ) * 10 > 0}">
+                    <a class="page-link" th:href="@{/management_announcement?page=} + ${(currentPage / 10 - 1) * 10}" aria-label="Go to the first page of the next group">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+
+                <!-- 현재 페이지 그룹의 페이지 번호들을 표시. 현재 페이지 번호 기준으로 10개 페이지를 표시 -->
+                <li th:each="pageNumber : ${#numbers.sequence((currentPage / 10) * 10, (currentPage / 10) * 10 + 9)}"
+                    th:if="${pageNumber < totalPages}"
+                    class="page-item"
+                    th:class="${pageNumber == currentPage ? 'active' : ''}">
+                    <a class="page-link" th:href="@{/management_announcement?page=} + ${pageNumber}" th:text="${pageNumber + 1}"></a>
+                </li>
+
+                <!-- 현재 페이지 그룹의 마지막 페이지가 전체 페이지 수보다 작을 경우, 다음 페이지 그룹의 첫 번째 페이지로 이동 -->
+                <li class="page-item" th:if="${(currentPage / 10 + 1) * 10 < totalPages}">
+                    <a class="page-link" th:href="@{/management_announcement?page=} + ${(currentPage / 10 + 1) * 10}" aria-label="Go to the first page of the next group">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let currentPage = [[${currentPage}]];
+    /*]]>*/
+</script>
 </body>
