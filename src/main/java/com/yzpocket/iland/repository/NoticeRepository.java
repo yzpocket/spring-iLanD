@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
     Page<Notice> findByNoticeTypeAndBoardNotNull(NoticeTypeEnum noticeTypeEnum, Pageable pageable);
+
+    Page<Notice> findByNoticeTypeAndBoardNotNullOrderByNoticeIdDesc(NoticeTypeEnum noticeTypeEnum, Pageable unpaged);
 }

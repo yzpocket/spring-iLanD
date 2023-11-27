@@ -57,7 +57,7 @@ public class NoticeService {
     }
     // 중요 공지 조회
     public Page<NoticeResponseDto> getImportantNotices() {
-        Page<Notice> importantNoticeList = noticeRepository.findByNoticeTypeAndBoardNotNull(NoticeTypeEnum.IMPORTANT, Pageable.unpaged());
+        Page<Notice> importantNoticeList = noticeRepository.findByNoticeTypeAndBoardNotNullOrderByNoticeIdDesc(NoticeTypeEnum.IMPORTANT, Pageable.unpaged());
         return importantNoticeList.map(NoticeResponseDto::new);
     }
 
