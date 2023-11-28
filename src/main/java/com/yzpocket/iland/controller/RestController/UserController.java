@@ -4,6 +4,7 @@ import com.yzpocket.iland.dto.StatusResponseDto;
 import com.yzpocket.iland.dto.UserDeleteRequestDto;
 import com.yzpocket.iland.dto.UserSignupRequestDto;
 import com.yzpocket.iland.dto.UserUpdateRequestDto;
+import com.yzpocket.iland.exception.DuplicateEmailException;
 import com.yzpocket.iland.security.UserDetailsImpl;
 import com.yzpocket.iland.service.UserService;
 import jakarta.validation.Valid;
@@ -44,4 +45,18 @@ public class UserController {
         }
         return userService.update(userDetails.getUser(), requestDto);
     }
+
+    // 이메일 중복 체크
+    @GetMapping("/checkEmail")
+    public StatusResponseDto checkEmail(@RequestParam String email) {
+        try {
+            userService.emailCheck(email);
+            return new StatusResponseDto("사용 가능한 이메일입니다.", HttpStatus.OK.value());
+        } catch (IllegalArgumentException e) {
+            return new StatusResponseDto("이메일 형식이 올바르지 않습니다.", HttpStatus.BAD_REQUEST.value());
+        } catch (DuplicateEmailException e) {
+            return new StatusResponseDto("이미 사용 중인 이메일입니다.", HttpStatus.CONFLICT.value());
+        }
+    }
+
 }

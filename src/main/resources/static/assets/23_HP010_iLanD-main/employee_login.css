@@ -38,7 +38,7 @@ a {
   }
   
   .login_id {
-    width: 90%;
+    width: 100%;
   }
   
   .login_id input {
@@ -52,7 +52,7 @@ a {
   }
   
   .login_pw {
-    width: 90%;
+    width: 100%;
   }
   
   .login_pw input {
@@ -76,6 +76,18 @@ a {
     outline: none;
     border-radius: 5px;
     background: #1E90FF;
+    color: white;
+    font-size: 1em;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .signup_sb {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    background: #ffe11e;
     color: white;
     font-size: 1em;
     letter-spacing: 2px;
