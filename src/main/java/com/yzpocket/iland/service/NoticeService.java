@@ -94,9 +94,27 @@ public class NoticeService {
 
     // 공지글 수정
     @Transactional
-    public StatusResponseDto updateNotice(NoticeUpdateRequestDto requestDto, Long noticeId) {
+    public StatusResponseDto updateNotice(NoticeUpdateRequestDto requestDto, Long noticeId, MultipartFile newFile) throws IOException {
         Notice updateNotice = findNoticeById(noticeId);
         updateNotice.update(requestDto);
+
+        // UUID 생성
+        String noticeUUID = UUID.randomUUID().toString();
+
+        // 파일이 선택된 경우에만 파일 처리
+        if (newFile != null) {
+            String originalFileName = newFile.getOriginalFilename();
+            // UUID와 파일명 조합
+            String uniqueFileName = noticeUUID + "_" + originalFileName;
+            String filePath = fileService.uploadFile(newFile, uniqueFileName);
+
+            // 파일 정보를 Notice 엔티티에 추가
+            File fileEntity = new File(uniqueFileName, newFile.getSize(), FileTypeEnum.IMG, filePath);
+            updateNotice.addFile(fileEntity);
+
+            // 파일 엔티티 저장
+            fileRepository.save(fileEntity);
+        }
 
         return new StatusResponseDto("공지글이 수정되었습니다.", HttpStatus.OK.value());
     }

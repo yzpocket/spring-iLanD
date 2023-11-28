@@ -48,12 +48,14 @@ function showNoticeContent(noticeId) {
             url: `/api/boards/notice/${noticeIdField.val()}`,
             success: function (notice) {
                 const fileList = notice.fileList;
+                // 파일 리스트에서 마지막 파일의 파일명 가져오기
+                const lastFileName = fileList.length > 0 ? fileList[fileList.length - 1].fileName.replace(/^[^_]+_/, '') : '';
 
                 // 가져온 공지글 정보를 화면에 표시
                 contentElement.html(`
                     <div>
                         <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
-                        ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${fileList[0].fileName.replace(/^[^_]+_/, '')}</div>` : ''}
+                        ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>` : ''}
                     </div>
                     <form style="width: 100%" id="modifyForm">
                         <input type="hidden" name="boardId" id="boardId" value="1">
@@ -151,11 +153,10 @@ function createNotice() {
 
 function modifyNotice(noticeId) {
     const noticeElement = $(`#notice-id-${noticeId}`).closest('.announcement-list');
-    const writer = "ADMIN";
+    const writer = "관리자";
     const type = noticeElement.find('select[name="modifyType"]').val();
     const title = noticeElement.find('input[name="modifyTitle"]').val();
     const contents = noticeElement.find('textarea[name="modifyContents"]').val();
-
 
     const requestData = {
         noticeType: type,
@@ -164,12 +165,31 @@ function modifyNotice(noticeId) {
         noticeContents: contents
     };
 
+    const formData = new FormData();
+
+    // 파일이 선택된 경우에만 FormData에 추가
+    const fileInput = noticeElement.find('input[name="photo"]');
+    if (fileInput.length > 0 && fileInput[0].files.length > 0) {
+        formData.append('file', fileInput[0].files[0]);
+    }
+
+    // 기존 파일이 있는 경우에는 fileId도 전송
+    const existingFileId = noticeElement.find('input[name="existingFileId"]').val();
+    if (existingFileId) {
+        formData.append('fileId', existingFileId);
+    }
+
+    formData.append('noticeType', type);
+    formData.append('noticeWriter', writer);
+    formData.append('noticeTitle', title);
+    formData.append('noticeContents', contents);
+
     $.ajax({
         type: 'PUT',
         url: '/api/boards/notice/update/' + noticeId,
-        data: JSON.stringify(requestData),
-        contentType: 'application/json;charset=UTF-8',
-        dataType: 'json',
+        data: formData,
+        contentType: false, // 필수
+        processData: false, // 필수
         success: function (response) {
             alert('공지 수정 성공!');
             window.location.reload();

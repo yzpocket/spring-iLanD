@@ -1,5 +1,8 @@
 package com.yzpocket.iland.service;
 
+import com.yzpocket.iland.entity.File;
+import com.yzpocket.iland.repository.FileRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
