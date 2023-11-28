@@ -22,9 +22,7 @@ public class UserSignupRequestDto {
 
     private String password2;
 
-    @Builder.Default
-    private long usertype = 0;
+    private long usertype;
 
-    @Builder.Default
-    private String token = "";
+    private String token;
 }

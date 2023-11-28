@@ -8,7 +8,6 @@ import com.yzpocket.iland.entity.User;
 import com.yzpocket.iland.entity.UserRoleEnum;
 import com.yzpocket.iland.exception.DuplicateEmailException;
 import com.yzpocket.iland.repository.UserRepository;
-import com.yzpocket.iland.security.UserDetailsImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
@@ -20,6 +19,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @RequiredArgsConstructor
@@ -127,11 +128,28 @@ public class UserService {
     }
 
     public void emailCheck(String email) {
+        validateEmailFormat(email);  // 형식 검사 메소드 호출
+
         // email 중복 확인
         Optional<User> checkEmail = userRepository.findByEmail(email);
         if(checkEmail.isPresent()){
             throw new DuplicateEmailException("중복된 email 입니다.");
         }
+    }
+
+    private void validateEmailFormat(String email) {
+        // 여기서 email 형식을 검사하는 로직 추가
+        if (!isValidEmailFormat(email)) {
+            throw new IllegalArgumentException("이메일 형식이 올바르지 않습니다.");
+        }
+    }
+
+    private boolean isValidEmailFormat(String email) {
+        // 정규식을 사용하여 email 형식 검사
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     public UserRoleEnum getUserRoleEnum(UserSignupRequestDto requestDto) {
@@ -152,19 +170,33 @@ public class UserService {
         return role;
     }
 
-    private void validateToken(String inputToken, String expectedToken, long userType) {
-        if (userType == 0) {
+    // 토큰 검증
+    public boolean validateToken(String inputToken, String ADMIN_TOKEN, long usertype) {
+        if (usertype == 0) {
             // usertype이 0인 경우에는 토큰이 없어도 정상 처리
-            return;
+            return false;
         }
 
         if (inputToken == null || inputToken.isEmpty()) {
             throw new IllegalArgumentException("토큰을 입력하세요.");
         }
 
-        String userTypeString = (userType == 1) ? "ADMIN" : "STAFF";
-        if (!expectedToken.equals(inputToken)) {
+        String userTypeString = getUserTypeString(usertype);
+
+        if (!this.ADMIN_TOKEN.equals(inputToken) || STAFF_TOKEN.equals(inputToken)) {
             throw new IllegalArgumentException(userTypeString + " 토큰이 유효하지 않습니다.");
+        }
+        return false;
+    }
+
+    private String getUserTypeString(long userType) {
+        switch ((int) userType) {
+            case 1:
+                return "ADMIN";
+            case 2:
+                return "STAFF";
+            default:
+                return "USER";
         }
     }
     private boolean checkUserPassword(String email, String password) {
