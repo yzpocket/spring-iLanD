@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -23,6 +24,8 @@ public class NoticeResponseDto {
 
     private NoticeTypeEnum noticeType;
 
+    private List<FileResponseDto> fileList; // 파일 리스트 추가
+
     public NoticeResponseDto(Notice notice){
         this.noticeId = notice.getNoticeId();
         this.formattedCreatedAt = formatDateTime(notice.getCreatedAt());
@@ -30,6 +33,8 @@ public class NoticeResponseDto {
         this.noticeWriter = notice.getNoticeWriter();
         this.noticeContents = notice.getNoticeContents();
         this.noticeType = notice.getNoticeType();
+        // Notice 엔티티에서 fileList를 가져와 FileResponseDto로 변환하여 할당
+        this.fileList = FileResponseDto.fromFileList(notice.getFileList());
     }
 
     private String formatDateTime(LocalDateTime dateTime) {

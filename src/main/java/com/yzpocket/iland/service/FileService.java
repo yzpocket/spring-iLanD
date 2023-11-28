@@ -1,5 +1,8 @@
 package com.yzpocket.iland.service;
 
+import com.yzpocket.iland.entity.File;
+import com.yzpocket.iland.repository.FileRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,5 +30,11 @@ public class FileService {
 
         // 저장된 파일의 경로나 파일명을 반환
         return fullPath;
+    }
+
+    // 파일 삭제 로직
+    public boolean deleteFile(String fileUrl) {
+        File file = new File(fileUrl);
+        return file.delete();
     }
 }

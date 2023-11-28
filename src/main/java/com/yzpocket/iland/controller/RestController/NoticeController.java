@@ -36,7 +36,7 @@ public class NoticeController {
     // 일반 공지글 조회
     @GetMapping("/normal")
     public ResponseEntity<Page<NoticeResponseDto>> getNormalNotices(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                                 @RequestParam(name = "size", defaultValue = "5") int size) {
+                                                                    @RequestParam(name = "size", defaultValue = "5") int size) {
         return ResponseEntity.ok(noticeService.getNormalNotices(page, size));
     }
 
@@ -55,9 +55,10 @@ public class NoticeController {
 
     // 공지글 수정
     @PutMapping("/update/{noticeId}")
-    public StatusResponseDto updateNotice(@RequestBody NoticeUpdateRequestDto requestDto,
-                                          @PathVariable Long noticeId){
-        return noticeService.updateNotice(requestDto, noticeId);
+    public StatusResponseDto updateNotice(@ModelAttribute NoticeUpdateRequestDto requestDto,
+                                          @PathVariable Long noticeId,
+                                          @RequestParam(required = false) MultipartFile file) throws IOException {
+        return noticeService.updateNotice(requestDto, noticeId, file);
     }
 
     // 공지글 삭제

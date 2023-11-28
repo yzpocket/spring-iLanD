@@ -38,7 +38,7 @@ public class Notice extends TimeStamped {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @OneToMany(mappedBy = "notice")
+    @OneToMany(mappedBy = "notice", cascade = CascadeType.ALL, orphanRemoval = true)
     List<File> fileList = new ArrayList<>();
 
     public Notice(String title, NoticeTypeEnum type, String writer, String contents, Board board) {
