@@ -55,4 +55,9 @@ public class Notice extends TimeStamped {
         this.noticeWriter = requestDto.getNoticeWriter();
         this.noticeContents = requestDto.getNoticeContents();
     }
+
+    public void addFile(File fileEntity) {
+        fileList.add(fileEntity);
+        fileEntity.setNotice(this);
+    }
 }

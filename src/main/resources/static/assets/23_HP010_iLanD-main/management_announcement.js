@@ -114,12 +114,26 @@ function createNotice() {
         noticeContents: contents
     };
 
+    const formData = new FormData();
+
+    // 파일이 선택된 경우에만 FormData에 추가
+    const fileInput = document.getElementById('file');
+    if (fileInput.files.length > 0) {
+        formData.append('file', fileInput.files[0]);
+    }
+
+    formData.append('boardId', boardId);
+    formData.append('noticeWriter', writer);
+    formData.append('noticeTitle', title);
+    formData.append('noticeType', type);
+    formData.append('noticeContents', contents);
+
     $.ajax({
         type: 'POST',
         url: '/api/boards/notice/create',
-        data: JSON.stringify(requestData),
-        contentType: 'application/json;charset=UTF-8',
-        dataType: 'json',
+        data: formData,
+        contentType: false, // 필수
+        processData: false, // 필수
         success: function (response) {
             alert('공지 추가 성공!');
             window.location.reload();
@@ -130,6 +144,7 @@ function createNotice() {
         }
     });
 }
+
 
 function modifyNotice(noticeId) {
     const noticeElement = $(`#notice-id-${noticeId}`).closest('.announcement-list');
