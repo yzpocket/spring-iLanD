@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/boards/notice")
@@ -18,8 +21,9 @@ public class NoticeController {
 
     // 공지글 생성
     @PostMapping("/create")
-    public StatusResponseDto createNotice(@RequestBody NoticeCreateRequestDto requestDto){
-        return noticeService.createNotice(requestDto);
+    public StatusResponseDto createNotice(@ModelAttribute NoticeCreateRequestDto requestDto,
+                                          @RequestParam(required = false) MultipartFile file) throws IOException {
+        return noticeService.createNotice(requestDto, file);
     }
 
     // 공지글 전체 조회

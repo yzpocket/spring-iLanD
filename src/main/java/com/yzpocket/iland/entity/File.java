@@ -24,6 +24,9 @@ public class File {
     private Long fileSize;
 
     @Column
+    private String fileUrl;
+
+    @Column
     @Enumerated(value = EnumType.STRING)
     private FileTypeEnum fileType;
 
@@ -42,4 +45,15 @@ public class File {
     @ManyToOne
     @JoinColumn(name = "Game_id")
     private Game game;
+
+    public File(String fileName, Long fileSize, FileTypeEnum fileType, String fileUrl) {
+        this.fileName = fileName;
+        this.fileSize = fileSize;
+        this.fileType = fileType;
+        this.fileUrl = fileUrl;
+    }
+
+    public void setNotice(Notice notice) {
+        this.notice = notice;
+    }
 }
