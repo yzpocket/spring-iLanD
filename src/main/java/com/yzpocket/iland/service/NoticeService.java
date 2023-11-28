@@ -123,6 +123,12 @@ public class NoticeService {
     @Transactional
     public StatusResponseDto deleteNotice(Long noticeId) {
         Notice deleteNotice = findNoticeById(noticeId);
+
+        // 연관된 파일 삭제
+        for (File file : deleteNotice.getFileList()) {
+            fileService.deleteFile(file.getFileUrl());
+        }
+
         noticeRepository.delete(deleteNotice);
 
         return new StatusResponseDto("공지글이 삭제되었습니다.", HttpStatus.OK.value());

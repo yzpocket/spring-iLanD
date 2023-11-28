@@ -56,4 +56,15 @@ public class File {
     public void setNotice(Notice notice) {
         this.notice = notice;
     }
+
+    // 파일 경로를 통한 생성자
+    public File(String fileUrl) {
+        this.fileUrl = fileUrl;
+    }
+
+    // 파일 삭제 로직
+    public boolean delete() {
+        java.io.File file = new java.io.File(this.fileUrl);
+        return file.delete();
+    }
 }

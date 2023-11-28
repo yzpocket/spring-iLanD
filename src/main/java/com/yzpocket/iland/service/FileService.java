@@ -31,4 +31,10 @@ public class FileService {
         // 저장된 파일의 경로나 파일명을 반환
         return fullPath;
     }
+
+    // 파일 삭제 로직
+    public boolean deleteFile(String fileUrl) {
+        File file = new File(fileUrl);
+        return file.delete();
+    }
 }
