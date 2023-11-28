@@ -47,10 +47,13 @@ function showNoticeContent(noticeId) {
         $.ajax({
             url: `/api/boards/notice/${noticeIdField.val()}`,
             success: function (notice) {
+                const fileList = notice.fileList;
+
                 // 가져온 공지글 정보를 화면에 표시
                 contentElement.html(`
                     <div>
                         <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
+                        ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${fileList[0].fileName.replace(/^[^_]+_/, '')}</div>` : ''}
                     </div>
                     <form style="width: 100%" id="modifyForm">
                         <input type="hidden" name="boardId" id="boardId" value="1">
@@ -79,7 +82,7 @@ function showNoticeContent(noticeId) {
                         <div class="mt-3 d-flex gap-2">
                             <div>
                                 <label for="f_photo" class="form-label">이미지</label>
-                                <input type="file" name="photo" id="f_photo" class="form-control"> <!-- 이미지 여러 개 일 경우 : multiple 추가 -->
+                                <input type="file" name="photo" id="f_photo" class="form-control">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3 d-flex gap-2">
