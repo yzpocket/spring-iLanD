@@ -38,3 +38,26 @@ function login() {
             alert('로그인에 실패했습니다.')
         });
 }
+function agreement() {
+    // SignUp 버튼을 눌렀을 때 실행되는 코드
+    window.location.href = "/agreement";
+}
+function signupView() {
+    // 체크 여부 확인
+    const isAgreementChecked1 = $('#chk_member1').prop('checked');
+    const isAgreementChecked2 = $('#chk_member2').prop('checked');
+
+    // 두 개의 약관에 모두 동의한 경우에만 회원가입 페이지로 이동
+    if (isAgreementChecked1 && isAgreementChecked2) {
+        // SignUp 버튼을 눌렀을 때 실행되는 코드
+        window.location.href = "/signup";
+    } else {
+        // 동의하지 않은 약관이 있을 경우 처리 (예: 경고 메시지 등)
+        alert('약관에 모두 동의해야 합니다.');
+        // 또는 다른 처리를 원하는 대로 추가
+    }
+}
+// 가입 취소 버튼 클릭 시 뒤로 가기
+function cancelSignup() {
+    history.back();
+}
