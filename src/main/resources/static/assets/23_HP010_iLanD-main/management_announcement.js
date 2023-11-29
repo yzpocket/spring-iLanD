@@ -49,14 +49,16 @@ function showNoticeContent(noticeId) {
             success: function (notice) {
                 const fileList = notice.fileList;
                 // 파일 리스트에서 마지막 파일의 파일명 가져오기
+                const originFileName = fileList.length > 0 ? fileList[fileList.length - 1].fileName : '';
                 const lastFileName = fileList.length > 0 ? fileList[fileList.length - 1].fileName.replace(/^[^_]+_/, '') : '';
-
                 // 가져온 공지글 정보를 화면에 표시
                 contentElement.html(`
                     <div>
                         <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
                         ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>` : ''}
                     </div>
+                     ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="/uploads/${originFileName}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
+
                     <form style="width: 100%" id="modifyForm">
                         <input type="hidden" name="boardId" id="boardId" value="1">
         
