@@ -10840,7 +10840,7 @@ textarea.form-control-lg {
     font-size: 2rem;
 }
 .footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
     background-color: #f8f9fa; /* 원하는 배경색으로 변경하세요. */
