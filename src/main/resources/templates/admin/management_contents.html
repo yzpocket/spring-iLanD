@@ -1,202 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav_employee.css">
-    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/management_contents.css">
-    <title>management contents</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav_employee.css">
+  <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/management_announcement.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link href="css/style.css" rel="stylesheet" />
+  <title>Management Content</title>
 </head>
 <body>
-  <nav class="navbar">
-      <ul class="nav_menu">
-        <li><a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a></li>
-        <div class="menu_icon_group">
-          <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
-          <li><a href="/"><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/96/exit--v1.png" alt="exit--v1"/></a></li>
-        </div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-xxl navbar-dark bg-white">
+  <div class="container px-9">
+    <a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a>
+    <h5> Management Content </h5>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/movies&tv">Movies&TV</a></li>
+        <li class="nav-item"><a class="nav-link" href="/game">Game</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chatting">Chatting</a></li>
+        <li class="nav-item"><a class="nav-link" href="/announcement">Announcement</a></li>
+        <li class="nav-item"><a class="nav-link" href="/aboutus_page">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/service_guide">Service Guide</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Login(Staffs&Admin)</a></li>
       </ul>
-  </nav>
-  <script src="/assets/23_HP010_iLanD-main/nav_employee.js"></script>
+    </div>
+  </div>
+</nav>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <div class="top-button">
-    <select name="combobox" id="combobox">
-      <option value="1">Movies List</option>
-      <option value="2">TV List</option>
-    </select>
-    <form action="검색결과페이지.html" method="GET"> <!--html 링크 추후 수정-->
-        <!-- 입력 창과 아이콘을 감싸는 div -->
-        <div class="search-container">
-            <!-- 입력 창 생성 -->
-            <input type="text" name="검색어" placeholder="검색어를 입력하세요" class="search-input">
-            <!-- 검색 버튼 (이미지 아이콘) -->
-            <button type="submit" class="search-button">
-                <img width="20" height="20" src="https://img.icons8.com/sf-regular/48/search.png" alt="search"/>
-            </button>
+<script src="/assets/23_HP010_iLanD-main/nav.js"></script>
+<script src="/assets/23_HP010_iLanD-main/nav_employee.js"></script>
+<script src="/assets/23_HP010_iLanD-main/management_contents.js"></script>
+
+
+<div class="card mb-4">
+  <div class="card-header" style="background-color: #EFF4F9">
+    영상 작성
+  </div>
+  <div class="d-flex justify-content-center" style="padding-bottom: 20px">
+    <form style="width: 70%" id="contentForm">
+      <input type="hidden" name="boardId" id="boardId" value="1">
+
+      <div class="d-flex mt-3 gap-2 align-items-end">
+        <div class="flex-grow-1">
+          <label for="contentTitle" class="form-label">제목</label>
+          <input type="text" name="contentTitle" class="form-control" id="contentTitle" placeholder="제목 입력">
         </div>
+      </div>
+      <div class="d-flex mt-3 gap-2 align-items-end">
+        <div class="flex-grow-1">
+          <label for="contentType" class="form-label">타입</label>
+          <select name="contentType" class="form-select" id="contentType">
+            <option value="MOVIE">영화</option>
+            <option value="TV">TV프로그램</option>
+          </select>
+        </div>
+      </div>
+      <div class="d-flex mt-3 gap-2 align-items-end">
+        <div class="flex-grow-1">
+          <label for="contentContents" class="form-label">내용</label>
+          <textarea name="contentContents" class="form-control" id="contentContents" placeholder="내용 입력" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="mt-3 d-flex gap-2">
+        <div>
+          <label for="file" class="form-label">이미지</label>
+          <input type="file" name="file" id="file" class="form-control"> <!-- 이미지 여러 개 일 경우 : multiple 추가 -->
+        </div>
+      </div>
+      <div class="mt-3 d-flex gap-2">
+        <button type="button" class="btn btn-primary w-50" onclick="createContent()">영상 업로드</button>
+        <button type="button" class="btn btn-outline-secondary w-50" onclick="resetForm()">리셋</button>
+      </div>
     </form>
   </div>
-  <h3>Movies List</h3>
-  <div class="m-list-box">
-    <table>
-      <form method="GET">
-      <tr id="head-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h4>제목</h4></td>
-        <td><h4>url</h4></td>
-        <td><h4>만료</h4></td>
-        <td><h4>업로드</h4></td>
-        <td><input type="image" width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/96/upload--v1.png" alt="submit">
-            <input type="image" width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/144/trash--v1.png" alt="trash">
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="text" name="" id="title-box"></td>
-        <td><input type="url" name="" id="title-box"></td>
-        <td><input type="date" name="" id="date-box"></td>
-        <td><input type="date" name="" id="date-box"></td>
-        <td><button type="button" id="add" onClick="location.href='management_contents_1.html'">추가</button></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5 id="point-blue"></h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5 id="point-blue"></h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>극한직업</h5></td>
-        <td><h5>https://iland.g..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>범죄도시3</h5></td>
-        <td><h5>https://iland.b..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>7번방의 선물</h5></td>
-        <td><h5>https://iland.7..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>타이타닉</h5></td>
-        <td><h5>https://iland.t..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>메이즈러너 데스..</h5></td>
-        <td><h5>https://iland.m..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      </form>
-    </table>
+</div>
+<div class="card mb-4">
+  <div class="card-header" style="background-color: #EFF4F9">
+    영상 전체목록
   </div>
-  <br>
-  <h3>TV List</h3>
-  <div class="m-list-box">
-    <table>
-      <form method="post">
-      <tr id="head-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h4>제목</h4></td>
-        <td><h4>url</h4></td>
-        <td><h4>만료</h4></td>
-        <td><h4>업로드</h4></td>
-        <td><input type="image" width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/96/upload--v1.png" alt="submit">
-            <input type="image" width="18" height="18" src="https://img.icons8.com/fluency-systems-regular/144/trash--v1.png" alt="trash">
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td><input type="text" name="" id="title-box"></td>
-        <td><input type="url" name="" id="title-box"></td>
-        <td><input type="date" name="" id="date-box"></td>
-        <td><input type="date" name="" id="date-box"></td>
-        <td><input type="submit" value="추가" id="add"></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5></h5></td>
-        <td><h5 id="point-blue"></h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>슬기로운 의사생활</h5></td>
-        <td><h5>https://iland.n..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>멜로가 체질</h5></td>
-        <td><h5>https://iland.i..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>스물다섯 스물하나</h5></td>
-        <td><h5>https://iland.d..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>모범 택시</h5></td>
-        <td><h5>https://iland.s..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>패밀리가 떴다</h5></td>
-        <td><h5>https://iland.s..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      <tr id="content-tr">
-        <td><input type="checkbox" name="" id=""></td>
-        <td><h5>하트시그널 4</h5></td>
-        <td><h5>https://iland.g..</h5></td>
-        <td><h5>24.01.01</h5></td>
-        <td><h5>23.01.01</h5></td>
-        <td><h5 id="point-blue">완료</h5></td>
-      </tr>
-      </form>
-    </table>
+  <div class="card-body announcement_area">
+
   </div>
+
+<!--  <div class="d-flex justify-content-center">-->
+<!--    <ul class="pagination">-->
+<!--      &lt;!&ndash; 현재 페이지 번호가 10 이상일 경우, 이전 페이지 그룹의 첫 번째 페이지로 이동 &ndash;&gt;-->
+
+<!--      <li class="page-item" th:if="${(currentPage / 10 ) * 10 > 0}">-->
+<!--        <a class="page-link" th:href="@{/management_announcement?page=} + ${(currentPage / 10 - 1) * 10}" aria-label="Go to the first page of the next group">-->
+<!--          <span aria-hidden="true">«</span>-->
+<!--        </a>-->
+<!--      </li>-->
+
+<!--      &lt;!&ndash; 현재 페이지 그룹의 페이지 번호들을 표시. 현재 페이지 번호 기준으로 10개 페이지를 표시 &ndash;&gt;-->
+<!--      <li th:each="pageNumber : ${#numbers.sequence((currentPage / 10) * 10, (currentPage / 10) * 10 + 9)}"-->
+<!--          th:if="${pageNumber < totalPages}"-->
+<!--          class="page-item"-->
+<!--          th:class="${pageNumber == currentPage ? 'active' : ''}">-->
+<!--        <a class="page-link" th:href="@{/management_announcement?page=} + ${pageNumber}" th:text="${pageNumber + 1}"></a>-->
+<!--      </li>-->
+
+<!--      &lt;!&ndash; 현재 페이지 그룹의 마지막 페이지가 전체 페이지 수보다 작을 경우, 다음 페이지 그룹의 첫 번째 페이지로 이동 &ndash;&gt;-->
+<!--      <li class="page-item" th:if="${(currentPage / 10 + 1) * 10 < totalPages}">-->
+<!--        <a class="page-link" th:href="@{/management_announcement?page=} + ${(currentPage / 10 + 1) * 10}" aria-label="Go to the first page of the next group">-->
+<!--          <span aria-hidden="true">»</span>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+</div>
+</div>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  let currentPage = [[${currentPage}]];
+  /*]]>*/
+</script>
 </body>
