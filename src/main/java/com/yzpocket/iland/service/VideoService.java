@@ -68,6 +68,18 @@ public class VideoService {
         return videoList.map(VideoResponseDto::new);
     }
 
+    // 영화 비디오 조회
+    public Page<VideoResponseDto> getMovieVideos() {
+        Page<Video> movieVideoList = videoRepository.findByVideoTypeAndBoardNotNullOrderByVideoIdDesc(VideoTypeEnum.MOVIE, Pageable.unpaged());
+        return movieVideoList.map(VideoResponseDto::new);
+    }
+
+    // TV 비디오 조회
+    public Page<VideoResponseDto> getTvVideos() {
+        Page<Video> tvVideoList = videoRepository.findByVideoTypeAndBoardNotNullOrderByVideoIdDesc(VideoTypeEnum.TV, Pageable.unpaged());
+        return tvVideoList.map(VideoResponseDto::new);
+    }
+
     // 비디오 선택 조회
     public VideoResponseDto getVideoById(Long videoId) {
         Video video = videoRepository.findById(videoId).orElseThrow(

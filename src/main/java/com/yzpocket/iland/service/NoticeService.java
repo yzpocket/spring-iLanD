@@ -71,7 +71,7 @@ public class NoticeService {
         Page<Notice> noticeList = noticeRepository.findAll(pageable);
         return noticeList.map(NoticeResponseDto::new);
     }
-    // 공지글 전체 조회 + 페이징
+    // 일반 공지 조회 + 페이징
     public Page<NoticeResponseDto> getNormalNotices(int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "noticeId");
         Pageable pageable = PageRequest.of(page, size, sort);

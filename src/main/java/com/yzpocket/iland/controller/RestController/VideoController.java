@@ -34,6 +34,20 @@ public class VideoController {
         return ResponseEntity.ok(videoService.getAllVideos(page, size));
     }
 
+    // 영화 비디오만 조회
+    @GetMapping("/movie")
+    public ResponseEntity<Page<VideoResponseDto>> getMovieVideos() {
+        Page<VideoResponseDto> movieVideos = videoService.getMovieVideos();
+        return ResponseEntity.ok(movieVideos);
+    }
+
+    // TV 비디오만 조회
+    @GetMapping("/tv")
+    public ResponseEntity<Page<VideoResponseDto>> getTvVideos() {
+        Page<VideoResponseDto> tvVideos = videoService.getTvVideos();
+        return ResponseEntity.ok(tvVideos);
+    }
+
     // 비디오 선택 조회
     @GetMapping("/{videoId}")
     public ResponseEntity<VideoResponseDto> getVideoById(@PathVariable Long videoId) {
