@@ -1,6 +1,7 @@
 package com.yzpocket.iland.dto;
 
 import com.yzpocket.iland.entity.File;
+import com.yzpocket.iland.entity.FileTypeEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ public class FileResponseDto {
     private Long fileId;
     private String fileName;
     private Long fileSize;
-    private String fileType;
+    private FileTypeEnum fileType;
     private String fileUrl;
 
 
@@ -21,7 +22,7 @@ public class FileResponseDto {
         this.fileId = file.getId();
         this.fileName = file.getFileName();
         this.fileSize = file.getFileSize();
-        this.fileType = file.getFileType().name();
+        this.fileType = file.getFileType();
         this.fileUrl = file.getFileUrl();
     }
 
