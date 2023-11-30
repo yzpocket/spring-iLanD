@@ -42,7 +42,7 @@ public class VideoResponseDto {
         // Video 엔티티에서 fileList를 가져와 FileResponseDto로 변환하여 할당
         this.fileList = FileResponseDto.fromFileList(video.getFileList());
         // 파일 리스트가 비어있지 않다면 첫 번째 파일의 내용을 Base64로 인코딩하여 할당
-        this.fileContent = fileList.isEmpty() ? "" : encodeFileContent(fileList.get(0).getFileUrl());
+        this.fileContent = fileList.isEmpty() ? "" : encodeFileContent(fileList.get(fileList.size() - 1).getFileUrl());
     }
 
     private String formatDateTime(LocalDateTime dateTime) {

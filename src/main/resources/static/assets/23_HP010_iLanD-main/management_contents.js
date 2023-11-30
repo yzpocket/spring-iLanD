@@ -55,7 +55,7 @@ function showVideoContent(videoId) {
                 contentElement.html(`
                     <div>
                         <div style="padding: 10px">👤 작성자 : ${video.videoWriter}</div>
-                        ${fileList.length > 0 ? `<!--<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>-->` : ''}
+                        ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>` : ''}
                     </div>
                      ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="data:image/jpeg;base64,${video.fileContent}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
 

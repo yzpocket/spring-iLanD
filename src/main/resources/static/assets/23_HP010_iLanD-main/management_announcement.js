@@ -57,7 +57,7 @@ function showNoticeContent(noticeId) {
                         <div style="padding: 10px">👤 작성자 : ${notice.noticeWriter}</div>
                         ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>` : ''}
                     </div>
-                     ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="/uploads/${originFileName}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
+                     ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="data:image/jpeg;base64,${notice.fileContent}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
 
                     <form style="width: 100%" id="modifyForm">
                         <input type="hidden" name="boardId" id="boardId" value="1">

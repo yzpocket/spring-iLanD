@@ -4,20 +4,24 @@ import com.yzpocket.iland.dto.NoticeCreateRequestDto;
 import com.yzpocket.iland.dto.NoticeResponseDto;
 import com.yzpocket.iland.dto.NoticeUpdateRequestDto;
 import com.yzpocket.iland.dto.StatusResponseDto;
+import com.yzpocket.iland.service.FileService;
 import com.yzpocket.iland.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @RestController
 @RequestMapping("/api/boards/notice")
 @RequiredArgsConstructor
 public class NoticeController {
     private final NoticeService noticeService;
+    private final FileService fileService;
 
     // 공지글 생성
     @PostMapping("/create")
@@ -43,6 +47,19 @@ public class NoticeController {
     // 공지글 선택 조회
     @GetMapping("/{noticeId}")
     public ResponseEntity<NoticeResponseDto> getNoticeById(@PathVariable Long noticeId) {
+        NoticeResponseDto noticeResponseDto = noticeService.getNoticeById(noticeId);
+
+        // 파일 읽어와서 추가
+        try {
+            byte[] fileData = fileService.readFile(noticeResponseDto.getFileUrl());
+            String base64Encoded = Base64.getEncoder().encodeToString(fileData);
+            noticeResponseDto.setFileContent(base64Encoded);
+        } catch (IOException e) {
+            // 파일 읽기 실패
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
         return ResponseEntity.ok(noticeService.getNoticeById(noticeId));
     }
 
