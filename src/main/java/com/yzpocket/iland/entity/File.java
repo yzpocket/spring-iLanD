@@ -57,6 +57,10 @@ public class File {
         this.notice = notice;
     }
 
+    public void setVideo(Video video) {
+        this.video = video;
+    }
+
     // 파일 경로를 통한 생성자
     public File(String fileUrl) {
         this.fileUrl = fileUrl;

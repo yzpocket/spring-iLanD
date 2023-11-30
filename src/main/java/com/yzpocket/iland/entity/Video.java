@@ -38,7 +38,7 @@ public class Video extends TimeStamped {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @OneToMany(mappedBy = "video")
+    @OneToMany(mappedBy = "video", cascade = CascadeType.ALL, orphanRemoval = true)
     List<File> fileList = new ArrayList<>();
 
     public Video(String title, VideoTypeEnum type, String writer, String contents, Board board) {
@@ -54,5 +54,10 @@ public class Video extends TimeStamped {
         this.videoType = requestDto.getVideoType();
         this.videoWriter = requestDto.getVideoWriter();
         this.videoContents = requestDto.getVideoContents();
+    }
+
+    public void addFile(File fileEntity) {
+        fileList.add(fileEntity);
+        fileEntity.setVideo(this);
     }
 }

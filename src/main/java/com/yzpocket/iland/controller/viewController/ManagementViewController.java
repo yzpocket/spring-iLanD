@@ -1,7 +1,9 @@
 package com.yzpocket.iland.controller.viewController;
 
 import com.yzpocket.iland.dto.NoticeResponseDto;
+import com.yzpocket.iland.dto.VideoResponseDto;
 import com.yzpocket.iland.service.NoticeService;
+import com.yzpocket.iland.service.VideoService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class ManagementViewController {
     private final NoticeService noticeService;
+    private final VideoService videoService;
 
     // 관리자 화면
     @GetMapping("/admin")
@@ -34,7 +37,13 @@ public class ManagementViewController {
 
     // 컨텐츠 관리 화면
     @GetMapping("/management_contents")
-    public String contentsView(){
+    public String contentView(@RequestParam(name = "page", defaultValue = "0") int page,
+                              @RequestParam(name = "size", defaultValue = "5") int size,
+                              Model model){
+        Page<VideoResponseDto> videoPage = videoService.getAllVideos(page, size);
+        model.addAttribute("currentPage", videoPage.getNumber());
+        model.addAttribute("totalPages", videoPage.getTotalPages());
+        model.addAttribute("notices", videoPage.getContent());
         return "/admin/management_contents";
     }
 

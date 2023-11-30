@@ -19,7 +19,6 @@ public class FileService {
 
     @Value("${file.upload-dir}")
     private String uploadDir;
-
     // 파일 업로드 및 저장 로직
     public String uploadFile(MultipartFile file, String uniqueFileName) throws IOException {
         // 파일명 보호를 위해서 UUID 포함된 파일명 사용
@@ -36,5 +35,9 @@ public class FileService {
     public boolean deleteFile(String fileUrl) {
         File file = new File(fileUrl);
         return file.delete();
+    }
+
+    public byte[] readFile(String fileUrl) throws IOException {
+        return Files.readAllBytes(Path.of(fileUrl));
     }
 }
