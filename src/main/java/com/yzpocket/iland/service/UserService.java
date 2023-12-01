@@ -37,12 +37,12 @@ public class UserService {
             String email = requestDto.getEmail();
             String username = requestDto.getUsername();
             String password = passwordEncoder.encode(requestDto.getPassword1());
-
+            UserRoleEnum role = UserRoleEnum.STAFF;
             passwordCheck(requestDto);
 
             emailCheck(email);
 
-            UserRoleEnum role = getUserRoleEnum(requestDto);
+            //UserRoleEnum role = getUserRoleEnum(requestDto);
 
             // 사용자 등록
             User user = new User(email, username, password, role);
@@ -152,53 +152,54 @@ public class UserService {
         return matcher.matches();
     }
 
-    public UserRoleEnum getUserRoleEnum(UserSignupRequestDto requestDto) {
-        // 사용자 ROLE 확인 (미입력시 default User)
-        UserRoleEnum role = UserRoleEnum.USER;
-
-        long userType = requestDto.getUsertype();
-        String token = requestDto.getToken();
-
-        if (userType == 1) {
-            validateToken(token, ADMIN_TOKEN, 1);
-            role = UserRoleEnum.ADMIN;
-        } else if (userType == 2) {
-            validateToken(token, STAFF_TOKEN, 2);
-            role = UserRoleEnum.STAFF;
-        }
-
-        return role;
-    }
+    //public UserRoleEnum getUserRoleEnum(UserSignupRequestDto requestDto) {
+    //    // 사용자 ROLE 확인 (미입력시 default User)
+    //    UserRoleEnum role = UserRoleEnum.USER;
+    //
+    //    long usertype = requestDto.getUsertype();
+    //    String token = requestDto.getToken();
+    //
+    //    if (usertype == 1) {
+    //        validateToken(token, ADMIN_TOKEN, 1);
+    //        role = UserRoleEnum.ADMIN;
+    //    } else if (usertype == 2) {
+    //        validateToken(token, STAFF_TOKEN, 2);
+    //        role = UserRoleEnum.STAFF;
+    //    }
+    //
+    //    return role;
+    //}
 
     // 토큰 검증
-    public boolean validateToken(String inputToken, String ADMIN_TOKEN, long usertype) {
-        if (usertype == 0) {
-            // usertype이 0인 경우에는 토큰이 없어도 정상 처리
-            return false;
-        }
+    //public boolean validateToken(String inputToken, String STAFF_TOKEN, long usertype) {
+    //    if (usertype == 0) {
+    //        // usertype이 0인 경우에는 토큰이 없어도 정상 처리
+    //        return false;
+    //    }
+    //
+    //    if (inputToken == null || inputToken.isEmpty()) {
+    //        throw new IllegalArgumentException("토큰을 입력하세요.");
+    //    }
+    //
+    //    String userTypeString = getUserTypeString(usertype);
+    //
+    //    if (!this.STAFF_TOKEN.equals(inputToken) || STAFF_TOKEN.equals(inputToken)) {
+    //        throw new IllegalArgumentException(userTypeString + " 토큰이 유효하지 않습니다.");
+    //    }
+    //    return false;
+    //}
 
-        if (inputToken == null || inputToken.isEmpty()) {
-            throw new IllegalArgumentException("토큰을 입력하세요.");
-        }
+    //private String getUserTypeString(long userType) {
+    //    switch ((int) userType) {
+    //        case 1:
+    //            return "ADMIN";
+    //        case 2:
+    //            return "STAFF";
+    //        default:
+    //            return "USER";
+    //    }
+    //}
 
-        String userTypeString = getUserTypeString(usertype);
-
-        if (!this.ADMIN_TOKEN.equals(inputToken) || STAFF_TOKEN.equals(inputToken)) {
-            throw new IllegalArgumentException(userTypeString + " 토큰이 유효하지 않습니다.");
-        }
-        return false;
-    }
-
-    private String getUserTypeString(long userType) {
-        switch ((int) userType) {
-            case 1:
-                return "ADMIN";
-            case 2:
-                return "STAFF";
-            default:
-                return "USER";
-        }
-    }
     private boolean checkUserPassword(String email, String password) {
         // 이메일로 사용자 찾기
         User user = userRepository.findByEmail(email).orElse(null);
