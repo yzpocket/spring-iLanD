@@ -1,0 +1,23 @@
+/* CSS 스타일 추가 */
+.chat-container {
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px; /* 채팅 창의 최대 높이 설정 (스크롤이 생길 경우) */
+    overflow-y: auto; /* 스크롤이 필요한 경우 스크롤이 나타나도록 설정 */
+    border: 1px solid #ccc; /* 창 테두리 추가 */
+    border-radius: 8px; /* 테두리 모서리를 더 부드럽게 만듦 */
+    background-color: #dcecff; /* 창 배경 색상 변경 */
+}
+
+.chat-message {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #efefef;
+    border-radius: 5px;
+}
+
+
+.current-user {
+    text-align: right;
+    background-color: #ffe11e; /* 오른쪽으로 정렬된 메시지의 배경색 */
+}
