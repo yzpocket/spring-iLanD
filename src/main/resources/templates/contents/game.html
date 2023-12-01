@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav.css">
-    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/game.css">
-    <title>Game</title>
+  <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/game.css">
+  <link href="/css/style.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/23_HP010_iLanD-main/nav.js"></script>
+  <script src="/assets/23_HP010_iLanD-main/game.js"></script>
+  <title> Game Room </title>
 </head>
 <body>
-  <!-- 네비게이션 바 -->
-  <nav class="navbar">
-    <ul class="nav_menu">
-      <li><a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a></li>
-      <div class="menu_icon_group">
-        <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/appointment-reminders--v1.png" alt="appointment-reminders--v1"/></a></li>
-        <li><a href=""><img class="menu_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/menu--v1.png" alt="menu--v1"/></a></li>
-      </div>
-    </ul>
-  </nav>
-  <script src="/assets/23_HP010_iLanD-main/nav.js"></script>
-
-  <!-- 게임 아이콘과 타이머 -->
-  <div class="gamebar">
-    <ul class="game_menu">
-      <li><a href=""><img class="game_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/48/alarm-clock--v1.png" alt="alarm-clock--v1"/></a></li>
-      <li><p id="timer">100</p></li>
-      <div class="align-right">
-        <li><h4>물만두</h4></li>
-        <li><a href=""><img class="game_icon" width="26" height="26" src="https://img.icons8.com/fluency-systems-regular/96/exit--v1.png" alt="exit--v1"/></a></li>
-      </div>
-    </ul>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-xxl navbar-dark bg-white">
+  <div class="container px-9">
+    <a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a>
+    <h5> Game Room </h5>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/movies&tv">Movies&TV</a></li>
+        <li class="nav-item"><a class="nav-link" href="/game">Game</a></li>
+        <li class="nav-item"><a class="nav-link" href="/chatting">Chatting</a></li>
+        <li class="nav-item"><a class="nav-link" href="/announcement">Announcement</a></li>
+        <li class="nav-item"><a class="nav-link" href="/aboutus_page">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/service_guide">Service Guide</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Login(Staffs&Admin)</a></li>
+      </ul>
+    </div>
   </div>
-  <script>
-    let seconds = 100;
-    const timerElement = document.getElementById('timer');
-
-    function updateTimer() {
-      if (seconds > 0) {
-        seconds--;
-        timerElement.textContent = seconds;
-      } else {
-        clearInterval(interval);
-        timerElement.textContent = 'Time';
-      }
-    }
-
-    const interval = setInterval(updateTimer, 1000); // 1초마다 updateTimer 함수 실행
-  </script>
-  <!-- 그림판 -->
-  <div class="artboard">
-      <div class="navbar1">
-        <ul class="nav_menu1">
-          <li><a href=""><img class="menu_icon1" width="24" height="24" src="/assets/23_HP010_iLanD-main/icon/icons8-edit-64.png"/></a></li>
-          <li><a href=""><img class="menu_icon1" width="24" height="24" src="/assets/23_HP010_iLanD-main/icon/icons8-paint-palette-64.png"/></a></li>
-          <li><a href=""><img class="menu_icon1" width="24" height="24" src="/assets/23_HP010_iLanD-main/icon/icons8-eraser-64.png"/></a></li>
-          <li><a href=""><img class="menu_icon1" width="24" height="24" src="/assets/23_HP010_iLanD-main/icon/icons8-fill-color-64.png"/></a></li>
-          <div class="menu_icon_group1">
-            <li><a href=""><img class="menu_icon1" width="20" height="20" src="/assets/23_HP010_iLanD-main/icon/icons8-arrow-90-left.png" alt="go-back"/></a></li>
-            <li><a href=""><img class="menu_icon1" width="20" height="20" src="/assets/23_HP010_iLanD-main/icon/icons8-arrow-90-right.png" alt="go-back"/></a></li>
-          </div>
-        </ul>
+</nav>
+<div class="card mb-4">
+  <div class="card-header" style="background-color: #EFF4F9"> 게임 페이지 </div>
+    <div class="card-body game_area d-flex justify-content-center">
+      <!-- image_area 부분에 이미지를 표시할 img 요소와 히든 필드 추가 -->
+      <div class="image_area">
+        <img id="img" style="width: 200px;height: 200px;" src="">
+        <input type="hidden" id="computerChoice" value="">
       </div>
-  </div>
+    </div>
 
-  <!-- 채팅 -->
-  <div class="chat"></div>
-  
+    <div class="card" style="padding: 15px">
+      <div class="button_area d-flex justify-content-between" style="padding-bottom: 20px">
+        <input type="button" class="btn btn-outline-primary" id="rock" value="🪨 Rock" onclick="userChoiceClick(1)" style="width: 30%; padding : 5px">
+        <input type="button" class="btn btn-outline-warning" id="paper" value="📜 Paper" onclick="userChoiceClick(2)" style="width: 30%; padding : 5px">
+        <input type="button" class="btn btn-outline-info" id="scissors" value="✂️ Scissors" onclick="userChoiceClick(3)" style="width: 30%; padding : 5px">
+      </div>
+
+      <div class="score">
+        <div class="card" style="padding: 10px; background-color: #f8f9fa">
+          ✅ 5승을 먼저 차지하세요!
+        </div>
+        <div class="" style="padding: 10px; background-color: #f8f9fa" >😁 사용자 점수 :
+          <span class="user_score" id="user_score">0</span>
+        </div>
+        <div class="" style="padding: 10px; background-color: #f8f9fa" >🤖 컴퓨터 점수 :
+          <span class="computer_score" id="computer_score">0</span>
+        </div>
+        <div class="" style="padding: 10px; background-color: #f8f9fa" >😱 무승부!? :
+          <span class="draw_score" id="draw_score">0</span>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- 컨텐츠(여기까지 삽입 됩니다.) -->
 </body>
 </html>
