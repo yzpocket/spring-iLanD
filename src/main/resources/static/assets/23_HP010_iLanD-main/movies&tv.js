@@ -45,7 +45,7 @@ function displayVideos(videos, containerSelector) {
 
         // 이미지를 클릭했을 때 해당 영화를 보는 페이지로 이동하는 링크 추가
         const linkElement = $(`<a href="movies&tv/${video.videoId}/watch"></a>`);
-        const imageElement = $(`<img src="data:image/jpeg;base64,${video.fileContent}" alt="첨부 이미지" style="width: 100px; height: 150px;">`);
+        const imageElement = $(`<img src="data:image/jpeg;base64,${video.imgFileContent}" alt="첨부 이미지" style="width: 100px; height: 150px;">`);
 
         linkElement.append(imageElement);
         listItem.append(linkElement);

@@ -23,8 +23,9 @@ public class VideoController {
     // 비디오 생성
     @PostMapping("/create")
     public StatusResponseDto createVideo(@ModelAttribute VideoCreateRequestDto requestDto,
-                                         @RequestParam(required = false) MultipartFile file) throws IOException {
-        return videoService.createVideo(requestDto, file);
+                                         @RequestParam(name = "imgFile", required = false) MultipartFile imgFile,
+                                         @RequestParam(name = "videoFile", required = false) MultipartFile videoFile) throws IOException {
+        return videoService.createVideo(requestDto, imgFile, videoFile);
     }
 
     // 비디오 전체 조회
@@ -53,11 +54,16 @@ public class VideoController {
     public ResponseEntity<VideoResponseDto> getVideoById(@PathVariable Long videoId) {
         VideoResponseDto videoResponseDto = videoService.getVideoById(videoId);
 
-        // 파일 읽어와서 추가
+        // 이미지 파일 읽어와서 추가
         try {
-            byte[] fileData = fileService.readFile(videoResponseDto.getFileUrl());
-            String base64Encoded = Base64.getEncoder().encodeToString(fileData);
-            videoResponseDto.setFileContent(base64Encoded);
+            byte[] imgFileData = fileService.readFile(videoResponseDto.getImgFileUrl());
+            String imgBase64Encoded = Base64.getEncoder().encodeToString(imgFileData);
+            videoResponseDto.setImgFileContent(imgBase64Encoded);
+
+            // 비디오 파일 읽어와서 추가
+            byte[] videoFileData = fileService.readFile(videoResponseDto.getVideoFileUrl());
+            String videoBase64Encoded = Base64.getEncoder().encodeToString(videoFileData);
+            videoResponseDto.setVideoFileContent(videoBase64Encoded);
         } catch (IOException e) {
             // 파일 읽기 실패
             e.printStackTrace();

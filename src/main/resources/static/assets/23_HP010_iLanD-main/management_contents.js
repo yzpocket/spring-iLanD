@@ -57,7 +57,7 @@ function showVideoContent(videoId) {
                         <div style="padding: 10px">👤 작성자 : ${video.videoWriter}</div>
                         ${fileList.length > 0 ? `<div style="padding: 10px">📎 첨부파일 : ${lastFileName}</div>` : ''}
                     </div>
-                     ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="data:image/jpeg;base64,${video.fileContent}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
+                     ${fileList.length > 0 ? `<div style="padding: 10px">미리보기: <img src="data:image/jpeg;base64,${video.imgFileContent}" alt="첨부 이미지" style="max-width: 200px; max-height: 200px;"></div>` : ''}
 
                     <form style="width: 100%" id="modifyForm">
                         <input type="hidden" name="boardId" id="boardId" value="1">
@@ -85,8 +85,12 @@ function showVideoContent(videoId) {
                         </div>
                         <div class="mt-3 d-flex gap-2">
                             <div>
-                                <label for="f_photo" class="form-label">이미지</label>
-                                <input type="file" name="photo" id="f_photo" class="form-control">
+                                <label for="imgFile" class="form-label">이미지</label>
+                                <input type="file" name="imgFile" id="imgFile" class="form-control">
+                            </div>
+                            <div>
+                              <label for="videoFile" class="form-label">영상 파일</label>
+                              <input type="file" name="videoFile" id="videoFile" class="form-control">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3 d-flex gap-2">
@@ -113,20 +117,18 @@ function createVideo() {
     const type = $('#videoType').val();
     const contents = $('#videoContents').val();
 
-    const requestData = {
-        boardId: boardId,
-        videoWriter: writer,
-        videoTitle: title,
-        videoType: type,
-        videoContents: contents
-    };
-
     const formData = new FormData();
 
     // 파일이 선택된 경우에만 FormData에 추가
-    const fileInput = document.getElementById('file');
-    if (fileInput.files.length > 0) {
-        formData.append('file', fileInput.files[0]);
+    const imageFileInput = document.getElementById('imgFile');
+    const videoFileInput = document.getElementById('videoFile');
+
+    if (imageFileInput.files.length > 0) {
+        formData.append('imgFile', imageFileInput.files[0]);
+    }
+
+    if (videoFileInput.files.length > 0) {
+        formData.append('videoFile', videoFileInput.files[0]);
     }
 
     formData.append('boardId', boardId);
