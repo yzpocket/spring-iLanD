@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav.css">
-    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/movies&tv.css">
+    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/chatting.css">
     <link href="/css/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -35,42 +35,27 @@
         </div>
     </div>
 </nav>
+<div class="card mb-4">
+    <div class="card-header" style="background-color: #EFF4F9"> 채팅 페이지 </div>
+    <div class="card-body watch_area d-flex justify-content-center">
 
-<!-- 컨텐츠(여기부터 삽입 됩니다.) -->
-<div id="main-content" class="container">
-    <h2 class="text-center">채팅 페이지</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="chatConnect">채팅 연결:</label>
-                    <button id="chatConnect" class="btn btn-primary" type="submit">연결</button>
-                    <button id="chatDisconnect" class="btn btn-danger" type="submit" disabled="disabled">연결 끊기</button>
+        <!-- 컨텐츠(여기부터 삽입 됩니다.) -->
+        <div id="main-content" class="container">
+            <div class="d-flex justify-content-between" style="padding: 10px">
+                <button id="chatConnect" class="btn btn-primary" type="button" style="padding: 10px">채팅방 입장</button>
+                <button id="chatDisconnect" class="btn btn-danger" type="button" disabled="disabled" style="padding: 10px">채팅방 나가기</button>
+            </div>
+
+            <div class="col-md-12">
+                <div id="conversation" class="chat-container">
+                    <!-- 채팅 내용이 동적으로 추가될 곳 -->
                 </div>
-            </form>
-        </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="chattingMessage">채팅 메시지:</label>
-                    <input type="text" id="chattingMessage" class="form-control" placeholder="메시지를 입력하세요...">
-                    <button id="messageSend" class="btn btn-success" type="submit">전송</button>
-                    <button id="home" onclick="location.href='/'" class="btn btn-success" type="submit">Main</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <table id="conversation" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th class="text-center">채팅 시작</th>
-                </tr>
-                </thead>
-                <tbody id="message">
-                </tbody>
-            </table>
+            </div>
+
+            <div class="d-flex justify-content-between" style="padding-top: 10px">
+                <input type="text" id="chattingMessage" class="form-control" placeholder="메시지를 입력하세요...">
+                <button id="messageSend" class="btn btn-success" type="button" style="width: 70px">전송</button>
+            </div>
         </div>
     </div>
 </div>
