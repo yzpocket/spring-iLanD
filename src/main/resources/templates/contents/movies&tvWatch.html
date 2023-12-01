@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav_employee.css">
+    <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/nav.css">
     <link rel="stylesheet" type="text/css" href="/assets/23_HP010_iLanD-main/movies&tv.css">
+    <link href="/css/style.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link href="css/style.css" rel="stylesheet" />
-    <title>Management Video</title>
+    <title>Watch Video</title>
 </head>
 <body>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-xxl navbar-dark bg-white">
     <div class="container px-9">
         <a href="#"><img width="32" height="32" src="/assets/23_HP010_iLanD-main/icon/iLanD_logo.png" onclick="openPage('/')"></a>
-        <h5> Management Video </h5>
+        <h5> Watch Video </h5>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -33,27 +33,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="/assets/23_HP010_iLanD-main/nav.js"></script>
-<script src="/assets/23_HP010_iLanD-main/nav_employee.js"></script>
-<script src="/assets/23_HP010_iLanD-main/movies&tv.js"></script>
-
+<script src="/assets/23_HP010_iLanD-main/movies&tvWatch.js"></script>
 
 <div class="card mb-4">
-    <div class="card-header" style="background-color: #EFF4F9">
-        영화목록
-    </div>
-    <div class="card-body movie_area">
+    <div class="card-header" style="background-color: #EFF4F9"> 영 상 시 청 </div>
+    <div class="card-body watch_area d-flex justify-content-center">
 
     </div>
-</div>
-<div class="card mb-4">
-    <div class="card-header" style="background-color: #EFF4F9">
-        TV프로그램목록
-    </div>
-    <div class="card-body tv_area">
-
-    </div>
-</div>
-
 </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
@@ -61,3 +47,4 @@
     /*]]>*/
 </script>
 </body>
+</html>

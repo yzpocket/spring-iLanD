@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,7 +28,9 @@ public class VideoService {
     private final FileRepository fileRepository;
 
     // 비디오 생성
-    public StatusResponseDto createVideo(VideoCreateRequestDto requestDto, MultipartFile file) throws IOException, IOException {
+    public StatusResponseDto createVideo(VideoCreateRequestDto requestDto,
+                                         @RequestParam(name = "imgFile", required = false) MultipartFile imgFile,
+                                         @RequestParam(name = "videoFile", required = false) MultipartFile videoFile) throws IOException {
         String title = requestDto.getVideoTitle();
         VideoTypeEnum type = requestDto.getVideoType();
         String writer = requestDto.getVideoWriter();
@@ -41,22 +44,31 @@ public class VideoService {
         Video video = new Video(title, type, writer, contents, board);
         videoRepository.save(video);
 
-        // 파일이 선택된 경우에만 파일 처리
-        if (file != null) {
-            String originalFileName = file.getOriginalFilename();
-            // UUID와 파일명 조합
-            String uniqueFileName = videoUUID + "_" + originalFileName;
-            String filePath = fileService.uploadFile(file, uniqueFileName);
+        // 이미지 파일 처리
+        if (imgFile != null) {
+            handleFile(imgFile, videoUUID, FileTypeEnum.IMG, video);
+        }
 
-            // 파일 정보를 Notice 엔티티에 추가
-            File fileEntity = new File(uniqueFileName, file.getSize(), FileTypeEnum.IMG, filePath);
-            video.addFile(fileEntity);
-
-            // 파일 엔티티 저장
-            fileRepository.save(fileEntity);
+        // 영상 파일 처리
+        if (videoFile != null) {
+            handleFile(videoFile, videoUUID, FileTypeEnum.VIDEO, video);
         }
 
         return new StatusResponseDto("영상이 생성되었습니다.", HttpStatus.OK.value());
+    }
+
+    private void handleFile(MultipartFile file, String videoUUID, FileTypeEnum fileType, Video video) throws IOException {
+        String originalFileName = file.getOriginalFilename();
+        // UUID와 파일명 조합
+        String uniqueFileName = videoUUID + "_" + originalFileName;
+        String filePath = fileService.uploadFile(file, uniqueFileName);
+
+        // 파일 정보를 Video 엔티티에 추가
+        File fileEntity = new File(uniqueFileName, file.getSize(), fileType, filePath);
+        video.addFile(fileEntity);
+
+        // 파일 엔티티 저장
+        fileRepository.save(fileEntity);
     }
 
     // 비디오 전체 조회 + 페이징
@@ -66,6 +78,18 @@ public class VideoService {
 
         Page<Video> videoList = videoRepository.findAll(pageable);
         return videoList.map(VideoResponseDto::new);
+    }
+
+    // 영화 비디오 조회
+    public Page<VideoResponseDto> getMovieVideos() {
+        Page<Video> movieVideoList = videoRepository.findByVideoTypeAndBoardNotNullOrderByVideoIdDesc(VideoTypeEnum.MOVIE, Pageable.unpaged());
+        return movieVideoList.map(VideoResponseDto::new);
+    }
+
+    // TV 비디오 조회
+    public Page<VideoResponseDto> getTvVideos() {
+        Page<Video> tvVideoList = videoRepository.findByVideoTypeAndBoardNotNullOrderByVideoIdDesc(VideoTypeEnum.TV, Pageable.unpaged());
+        return tvVideoList.map(VideoResponseDto::new);
     }
 
     // 비디오 선택 조회
