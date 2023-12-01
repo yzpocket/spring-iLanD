@@ -22,13 +22,13 @@ public class NoticeViewController {
         model.addAttribute("currentPage", noticePage.getNumber());
         model.addAttribute("totalPages", noticePage.getTotalPages());
         model.addAttribute("notices", noticePage.getContent());
-        return "/contents/announcement";
+        return "contents/announcement";
     }
 
     @GetMapping("/important")
     public String getImportantNotices(Model model) {
         Page<NoticeResponseDto> importantNotices = noticeService.getImportantNotices();
         model.addAttribute("importantNotices", importantNotices);
-        return "/contents/announcement";
+        return "contents/announcement";
     }
 }

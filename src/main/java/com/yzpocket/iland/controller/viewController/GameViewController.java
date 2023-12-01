@@ -8,6 +8,6 @@ public class GameViewController {
     // 게임 화면
     @GetMapping("/game")
     public String gameView(){
-        return "/contents/game";
+        return "contents/game";
     }
 }

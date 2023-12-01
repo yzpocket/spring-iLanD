@@ -8,6 +8,6 @@ public class ServiceGuideViewController {
     // 가이드정보 화면
     @GetMapping("/service_guide")
     public String gameView(){
-        return "/info/service_guide";
+        return "info/service_guide";
     }
 }

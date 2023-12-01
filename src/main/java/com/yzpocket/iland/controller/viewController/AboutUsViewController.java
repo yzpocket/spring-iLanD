@@ -8,6 +8,6 @@ public class AboutUsViewController {
     // 정보 화면
     @GetMapping("/aboutus_page")
     public String aboutUsView(){
-        return "/info/aboutus_page";
+        return "info/aboutus_page";
     }
 }

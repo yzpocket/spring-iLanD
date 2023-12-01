@@ -8,12 +8,12 @@ public class UserViewController {
     // 동의화면
     @GetMapping("/agreement")
     public String agreementView(){
-        return "/member/agreement";
+        return "member/agreement";
     }
 
     // 회원가입화면
     @GetMapping("/signup")
     public String signupView(){
-        return "/member/signup";
+        return "member/signup";
     }
 }

@@ -13,13 +13,13 @@ public class VideoViewController {
     // 비디오 화면
     @GetMapping("/movies&tv")
     public String videoView(){
-        return "/contents/movies&tv";
+        return "contents/movies&tv";
     }
 
     // 비디오 시청 화면
     @GetMapping("/movies&tv/{videoId}/watch")
     public String videoWatchView(@PathVariable String videoId, Model model){
         model.addAttribute("videoId", videoId);
-        return "/contents/movies&tvWatch";
+        return "contents/movies&tvWatch";
     }
 }

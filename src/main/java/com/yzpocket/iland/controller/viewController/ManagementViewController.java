@@ -20,7 +20,7 @@ public class ManagementViewController {
     // 관리자 화면
     @GetMapping("/admin")
     public String adminView() {
-        return "/admin/employee_main";
+        return "admin/employee_main";
     }
 
     // 공지 관리 화면
@@ -32,7 +32,7 @@ public class ManagementViewController {
         model.addAttribute("currentPage", noticePage.getNumber());
         model.addAttribute("totalPages", noticePage.getTotalPages());
         model.addAttribute("notices", noticePage.getContent());
-        return "/admin/management_announcement";
+        return "admin/management_announcement";
     }
 
     // 컨텐츠 관리 화면
@@ -44,12 +44,12 @@ public class ManagementViewController {
         model.addAttribute("currentPage", videoPage.getNumber());
         model.addAttribute("totalPages", videoPage.getTotalPages());
         model.addAttribute("notices", videoPage.getContent());
-        return "/admin/management_contents";
+        return "admin/management_contents";
     }
 
     // 채팅 관리 화면
     @GetMapping("/management_chatting")
     public String chatView(){
-        return "/admin/management_chatting";
+        return "admin/management_chatting";
     }
 }

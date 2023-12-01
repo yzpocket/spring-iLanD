@@ -22,6 +22,6 @@ public class AuthViewController {
 
         model.addAttribute("loginUserRole", role);
 
-        return "/member/employee_login";
+        return "member/employee_login";
     }
 }
