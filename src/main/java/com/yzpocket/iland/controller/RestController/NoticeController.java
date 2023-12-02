@@ -49,18 +49,20 @@ public class NoticeController {
     public ResponseEntity<NoticeResponseDto> getNoticeById(@PathVariable Long noticeId) {
         NoticeResponseDto noticeResponseDto = noticeService.getNoticeById(noticeId);
 
-        // 파일 읽어와서 추가
-        try {
-            byte[] fileData = fileService.readFile(noticeResponseDto.getFileUrl());
-            String base64Encoded = Base64.getEncoder().encodeToString(fileData);
-            noticeResponseDto.setFileContent(base64Encoded);
-        } catch (IOException e) {
-            // 파일 읽기 실패
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        // 파일이 있는 경우에만 파일 읽어와서 추가
+        if (noticeResponseDto.getFileUrl() != null && !noticeResponseDto.getFileUrl().isEmpty()) {
+            try {
+                byte[] fileData = fileService.readFile(noticeResponseDto.getFileUrl());
+                String base64Encoded = Base64.getEncoder().encodeToString(fileData);
+                noticeResponseDto.setFileContent(base64Encoded);
+            } catch (IOException e) {
+                // 파일 읽기 실패
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         }
 
-        return ResponseEntity.ok(noticeService.getNoticeById(noticeId));
+        return ResponseEntity.ok(noticeResponseDto);
     }
 
     // 중요공지만 조회
