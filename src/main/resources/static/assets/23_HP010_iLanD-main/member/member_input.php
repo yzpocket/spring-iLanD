@@ -71,7 +71,7 @@ include 'inc_header.php';
       <label for="f_photo" class="form-label">프로필 이미지</label>
       <input type="file" name="photo" id="f_photo" class="form-control"> <!-- 이미지 여러 개 일 경우 : multiple 추가 -->
     </div>
-    <img id="f_preview" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/96/6c757d/external-glyph-web-and-seo-tanah-basah-glyph-tanah-basah-53.png" alt="external-glyph-web-and-seo-tanah-basah-glyph-tanah-basah-53" class="w-25" alt="photo image">
+    <img id="f_preview" src="/images/external-glyph-web-and-seo-tanah-basah-glyph-tanah-basah-53.png" alt="external-glyph-web-and-seo-tanah-basah-glyph-tanah-basah-53" class="w-25" alt="photo image">
   </div>
 
   <div class="mt-3 d-flex gap-2">
